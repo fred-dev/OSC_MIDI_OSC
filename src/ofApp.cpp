@@ -28,6 +28,7 @@ void ofApp::setup(){
 	message="No messages yet";
     
     midiIn.openPort(incomingPortMidi);
+	midiIn.addListener(this);
     oscSend.setup(outgoingIpOSC, outGoingPortOsc);
     
 }
@@ -65,20 +66,23 @@ void ofApp::update(){
 	}
 }
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
+	
      midiMessage = msg;
-    if (midiMessage.pitch!=0 & midiMessage.velocity!=0) {
+    if (midiMessage.pitch!=0 && midiMessage.velocity!=0) {
         ofxOscMessage m;
         m.setAddress("/noteOn");
         m.addIntArg(midiMessage.pitch);
         oscSend.sendMessage(m);
         message ="Received Note on Note: " + ofToString(midiMessage.pitch);
+		cout<<message<<endl;
     }
-    if (midiMessage.pitch!=0 & midiMessage.velocity==0) {
+    if (midiMessage.pitch!=0 && midiMessage.velocity==0) {
         ofxOscMessage m;
         m.setAddress("/noteOff");
         m.addIntArg(midiMessage.pitch);
         oscSend.sendMessage(m);
         message ="Received Note off Note: " + ofToString(midiMessage.pitch);
+		cout<<message<<endl;
     }
     if (midiMessage.control!=0) {
         ofxOscMessage m;
@@ -87,6 +91,7 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
         m.addIntArg(midiMessage.value);
         oscSend.sendMessage(m);
         message ="Received cc Controller ID " + ofToString(midiMessage.control) + " Controller value " + ofToString(midiMessage.value);
+		cout<<message<<endl;
     }
     
     

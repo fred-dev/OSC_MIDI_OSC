@@ -1,6 +1,6 @@
 
 <incomingPortOsc>12345</incomingPortOsc>
-<outGoingPortOsc>12344</outGoingPortOsc>
+<outGoingPortOsc>1234</outGoingPortOsc>
 <incomingPortMidi>2</incomingPortMidi>
 <outGoingPortMidi>2</outGoingPortMidi>
 <outgoingIpOSC>127.0.0.1</outgoingIpOSC>
