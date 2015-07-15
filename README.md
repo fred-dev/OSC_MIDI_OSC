@@ -22,3 +22,8 @@ and will automatically send OSC messages in this format when a midi note off is 
 
 This application was made as a helper for people using software that does not suport OSC natively but want to interact with OSC enabled
 software. It was developed as part of Crosstalk Body and Technology Laboratory in Tehran in 2015 by Frederick Rodrigues.
+
+
+To use this with windows make sure you install some kind of virtual midi port- we used Loopmidi from Tobias Erichsen you can download it here:
+
+http://www.tobias-erichsen.de/software/loopmidi.html

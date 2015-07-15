@@ -10,28 +10,40 @@
 	<string>OSC_MIDI_OSC</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>21610C300380785155775EAE19E3DCAA1FCDD8A0</key>
+		<string>https://github.com/fred-dev/OSC_MIDI_OSC.git</string>
 		<key>2DE9C8846D9375EAACFABA8963120E8E7719BAF5</key>
 		<string>https://github.com/openframeworks/openFrameworks.git</string>
 		<key>90E2F969A762FB62C413A0C44D1F334E6EC3F531</key>
 		<string>https://github.com/danomatika/ofxMidi.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>apps/myApps/OSC_MIDI_OSC/OSC_MIDI_OSC.xcodeproj</string>
+	<string>OSC_MIDI_OSC.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>21610C300380785155775EAE19E3DCAA1FCDD8A0</key>
+		<string>../..</string>
 		<key>2DE9C8846D9375EAACFABA8963120E8E7719BAF5</key>
 		<string>../../../../..</string>
 		<key>90E2F969A762FB62C413A0C44D1F334E6EC3F531</key>
-		<string>../../../../..addons/ofxMidi/</string>
+		<string>../../../../../addons/ofxMidi</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/openframeworks/openFrameworks.git</string>
+	<string>https://github.com/fred-dev/OSC_MIDI_OSC.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2DE9C8846D9375EAACFABA8963120E8E7719BAF5</string>
+	<string>21610C300380785155775EAE19E3DCAA1FCDD8A0</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2DE9C8846D9375EAACFABA8963120E8E7719BAF5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
@@ -44,9 +56,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2DE9C8846D9375EAACFABA8963120E8E7719BAF5</string>
+			<string>21610C300380785155775EAE19E3DCAA1FCDD8A0</string>
 			<key>IDESourceControlWCCName</key>
-			<string>openFrameworks</string>
+			<string>OSC_MIDI_OSC</string>
 		</dict>
 	</array>
 </dict>
