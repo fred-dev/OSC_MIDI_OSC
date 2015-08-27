@@ -27,3 +27,7 @@ software. It was developed as part of Crosstalk Body and Technology Laboratory i
 To use this with windows make sure you install some kind of virtual midi port- we used Loopmidi from Tobias Erichsen you can download it here:
 
 http://www.tobias-erichsen.de/software/loopmidi.html
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fred-dev/osc_midi_osc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
