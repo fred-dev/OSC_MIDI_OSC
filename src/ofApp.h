@@ -35,7 +35,7 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     ofxOscSender oscSend;
     ofxXmlSettings xmlSettings;
     
-    int incomingPortOsc, outGoingPortOsc, incomingPortMidi, outGoingPortMidi;
+    int incomingPortOsc, outGoingPortOsc, incomingPortMidi, outGoingPortMidi, midiOutChannel;
     string outgoingIpOSC;
     
 		

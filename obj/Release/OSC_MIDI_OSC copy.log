@@ -1,0 +1,14 @@
+﻿  ofApp.cpp
+D:\Users\Fred\Dropbox\Code\OF_GIT\openFrameworks\libs\openFrameworks\math\ofMatrix4x4.h(320): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Users\Fred\Dropbox\Code\OF_GIT\openFrameworks\libs\openFrameworks\math\ofMatrix4x4.h(325): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Users\Fred\Dropbox\Code\OF_GIT\openFrameworks\libs\openFrameworks\math\ofMatrix4x4.h(969): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Users\Fred\Dropbox\Code\OF_GIT\openFrameworks\libs\openFrameworks\math\ofMatrix4x4.h(970): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Users\Fred\Dropbox\Code\OF_GIT\openFrameworks\libs\openFrameworks\math\ofMatrix4x4.h(971): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Users\Fred\Dropbox\Code\OF_GIT\openFrameworks\libs\openFrameworks\math\ofMatrix4x4.h(972): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+d:\users\fred\dropbox\code\of_git\openframeworks\addons\ofxosc\src\ofxOscBundle.h(52): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+d:\users\fred\dropbox\code\of_git\openframeworks\addons\ofxosc\src\ofxOscBundle.h(53): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+     Creating library bin\OSC_MIDI_OSC copy.lib and object bin\OSC_MIDI_OSC copy.exp
+  LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
+  OSC_MIDI_OSC copy.vcxproj -> D:\Users\Fred\Dropbox\Code\OF_GIT\openFrameworks\apps\Windows_Apps\OSC_MIDI_OSC copy\bin\OSC_MIDI_OSC copy.exe
+  
+  	                   9	D:\Users\Fred\Dropbox\Code\OF_GIT\openFrameworks\export\vs\x64\
