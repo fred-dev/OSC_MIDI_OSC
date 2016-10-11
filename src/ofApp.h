@@ -22,6 +22,11 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    void buildSysExMMCMessage(char ID);
+    
+    vector<unsigned char> sysexMMCMsg;
+    
+    
 		ofxOscReceiver receiver;
 		ofxMidiOut midiOut;
 	string message;

@@ -2,6 +2,9 @@
 
 A simple crossplatform OSC to Midi and Midi to OSC convertor
 
+MAC OS 10.10+
+Winddows 8+ 64 and 32 Bit releases available on the release tab.
+
 Made with openframeworks (https://github.com/openframeworks/openFrameworks)  
 using ofxMidi (https://github.com/danomatika/ofxMidi)
 
@@ -36,9 +39,29 @@ This application was made as a helper for people using software that does not su
 software. It was developed as part of Crosstalk Body and Technology Laboratory in Tehran in 2015 by Frederick Rodrigues.
 
 
+UPDATE
+Now includes Midi Machine ccontrol
+
+Will output MMC commands from the following OSC inputs (no values needed, just the correct address)
+
+"/MMCCommand/stop"
+"/MMCCommand/play"
+"/MMCCommand/forward"
+"/MMCCommand/rewind"
+"/MMCCommand/punchIn"
+"/MMCCommand/punchOut"
+"/MMCCommand/recordPause"
+"/MMCCommand/pause"
+
+The app will also output these commands over OSC when receiving the relevant MMC commands in the midi input port
+
+
 To use this with windows make sure you install some kind of virtual midi port- we used Loopmidi from Tobias Erichsen you can download it here:
 
 http://www.tobias-erichsen.de/software/loopmidi.html
+
+TO DO 
+MSC and MTC
 
 
 

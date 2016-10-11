@@ -5,7 +5,8 @@ void ofApp::setup(){
     
     ofSetVerticalSync(true);
     ofBackground(255);
-    ofSetLogLevel(OF_LOG_VERBOSE);
+    ofSetLogLevel(OF_LOG_SILENT);
+    
     
     if (xmlSettings.loadFile("MIDI_OSC_SETTINGS.xml")) {
         ofLogVerbose()<<"XML loaded"<<endl;
@@ -26,6 +27,7 @@ void ofApp::setup(){
     
     midiIn.listPorts();
     midiIn.openPort(incomingPortMidi);
+    midiIn.ignoreTypes(false, false,false);
     midiIn.addListener(this);
     
     oscSend.setup(outgoingIpOSC, outGoingPortOsc);
@@ -90,11 +92,133 @@ void ofApp::update(){
             message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
             ofLogVerbose()<<message<<endl;
         }
+        
+        
+        if(m.getAddress() == "/MMCCommand/stop"){
+            buildSysExMMCMessage(0x01);
+            midiOut.sendMidiBytes(sysexMMCMsg);
+            message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
+            ofLogVerbose()<<message<<endl;
+        }
+        
+        if(m.getAddress() == "/MMCCommand/play"){
+            buildSysExMMCMessage(0x02);
+            midiOut.sendMidiBytes(sysexMMCMsg);
+            message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
+            ofLogVerbose()<<message<<endl;
+        }
+        
+        if(m.getAddress() == "/MMCCommand/forward"){
+            buildSysExMMCMessage(0x04);
+            midiOut.sendMidiBytes(sysexMMCMsg);
+            message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
+            ofLogVerbose()<<message<<endl;
+        }
+        
+        if(m.getAddress() == "/MMCCommand/rewind"){
+            buildSysExMMCMessage(0x05);
+            midiOut.sendMidiBytes(sysexMMCMsg);
+            message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
+            ofLogVerbose()<<message<<endl;
+        }
+        
+        if(m.getAddress() == "/MMCCommand/punchIn"){
+            buildSysExMMCMessage(0x06);
+            midiOut.sendMidiBytes(sysexMMCMsg);
+            message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
+            ofLogVerbose()<<message<<endl;
+        }
+        
+        if(m.getAddress() == "/MMCCommand/punchOut"){
+            buildSysExMMCMessage(0x07);
+            midiOut.sendMidiBytes(sysexMMCMsg);
+            message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
+            ofLogVerbose()<<message<<endl;
+        }
+        
+        if(m.getAddress() == "/MMCCommand/recordPause"){
+            buildSysExMMCMessage(0x08);
+            midiOut.sendMidiBytes(sysexMMCMsg);
+            message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
+            ofLogVerbose()<<message<<endl;
+        }
+        
+        if(m.getAddress() == "/MMCCommand/pause"){
+            buildSysExMMCMessage(0x09);
+            midiOut.sendMidiBytes(sysexMMCMsg);
+            message ="Sending poly aftertouch Note: " + ofToString(m.getArgAsInt32(0)) + " value " + ofToString(m.getArgAsInt32(1));
+            ofLogVerbose()<<message<<endl;
+        }
     }
 }
+
+
+void ofApp::buildSysExMMCMessage(char ID) {
+    sysexMMCMsg.clear();
+    sysexMMCMsg.push_back(MIDI_SYSEX);
+    sysexMMCMsg.push_back(0x7F);
+    sysexMMCMsg.push_back(0x7F);
+    sysexMMCMsg.push_back(0x06);
+    sysexMMCMsg.push_back(ID);
+    sysexMMCMsg.push_back(MIDI_SYSEX_END);
+   
+}
+
+
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
+    midiMessage=msg;
     
-    midiMessage = msg;
+    if (midiMessage.status==MIDI_SYSEX) {
+        ofLogVerbose()<<"Sysex Message"<<endl;
+        ofLogVerbose()<<"Message Size " + ofToString(midiMessage.bytes.size())<<endl;
+        ofxOscMessage m;
+
+    if (midiMessage.bytes[4]==0x01) {
+            m.setAddress("/MMCCommand/stop");
+            m.addIntArg(0);
+            message ="Received Midi Machine Control message: " + ofToString(midiMessage.pitch) + " Command: Stop" ;
+        }
+        if (midiMessage.bytes[4]==0x02) {
+            m.setAddress("/MMCCommand/play");
+            m.addIntArg(0);
+            message ="Received Midi Machine Control message: " + ofToString(midiMessage.pitch) + " Command: Play" ;
+        }
+        if (midiMessage.bytes[4]==0x04) {
+            m.setAddress("/MMCCommand/forward");
+            m.addIntArg(0);
+            message ="Received Midi Machine Control message: " + ofToString(midiMessage.pitch) + " Command: Fast forward" ;
+        }
+        if (midiMessage.bytes[4]==0x05) {
+            m.setAddress("/MMCCommand/rewind");
+            m.addIntArg(0);
+            message ="Received Midi Machine Control message: " + ofToString(midiMessage.pitch) + " Command: Rewind" ;
+        }
+        if (midiMessage.bytes[4]==0x06) {
+            m.setAddress("/MMCCommand/punchIn");
+            m.addIntArg(0);
+            message ="Received Midi Machine Control message: " + ofToString(midiMessage.pitch) + " Command: Pucnh in" ;
+        }
+        if (midiMessage.bytes[4]==0x07) {
+            m.setAddress("/MMCCommand/punchOut");
+            m.addIntArg(0);
+            message ="Received Midi Machine Control message: " + ofToString(midiMessage.pitch) + " Command: Puch Out" ;
+        }
+        if (midiMessage.bytes[4]==0x08) {
+            m.setAddress("/MMCCommand/recordPause");
+            m.addIntArg(0);
+            message ="Received Midi Machine Control message: " + ofToString(midiMessage.pitch) + " Command: Record Pause" ;
+        }
+        if (midiMessage.bytes[4]==0x09) {
+            m.setAddress("/MMCCommand/pause");
+            m.addIntArg(0);
+            message ="Received Midi Machine Control message: " + ofToString(midiMessage.pitch) + " Command: Pause" ;
+        }
+        
+        
+        oscSend.sendMessage(m);
+        
+        ofLogVerbose()<<message<<endl;
+    }
     
     if (midiMessage.status==MIDI_NOTE_ON) {
         ofxOscMessage m;
@@ -171,6 +295,10 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
         ofLogVerbose()<<message<<endl;
     }
     
+    
+    
+    
+    
 }
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -185,7 +313,6 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
     
 }
 
