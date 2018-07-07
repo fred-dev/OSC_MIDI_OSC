@@ -4,7 +4,9 @@ A simple cross platform OSC to Midi and Midi to OSC convertor made with Made wit
 using ofxMidi (https://github.com/danomatika/ofxMidi)
 
 MAC OS 10.10+ (ish) 64 bit release available on the release tab.
+
 Windows 8+ 64 and 32 Bit releases available on the release tab.
+
 Linux has many requirements, see below, if you are looking for a fast and light solution for Linux this may not be for you, the openframeworks dependencies are kind of heavy as it 
 supports a lot of interesting tools.
 
