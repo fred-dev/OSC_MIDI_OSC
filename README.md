@@ -16,8 +16,10 @@ For OSX 10.13 or later the release does not seem to work, feel free to compile i
 To compile and work with this code download openframeworks (for a fast setup go for a release from https://openframeworks.cc/download/)
 Follow the instructions for setting up openframeworks on your platform.
 
-Navigate to openframeworksRoot/myApps/ and clone this repository
+Navigate to openframeworksRoot/myApps/ and clone this repository.
+
 Navigate to openframeworksRoot/addons/ and clone the ofxMidi repository (https://github.com/danomatika/ofxMidi)
+
 Compile for your platform and make the improvements I never got around too, like midi show control and timecode.
 
 
@@ -58,13 +60,21 @@ Now includes Midi Machine control
 Will output MMC commands from the following OSC inputs (no values needed, just the correct address)
 
 "/MMCCommand/stop"
+
 "/MMCCommand/play"
+
 "/MMCCommand/forward"
+
 "/MMCCommand/rewind"
+
 "/MMCCommand/punchIn"
+
 "/MMCCommand/punchOut"
+
 "/MMCCommand/recordPause"
+
 "/MMCCommand/pause"
+
 
 The app will also output these commands over OSC when receiving the relevant MMC commands in the midi input port
 
