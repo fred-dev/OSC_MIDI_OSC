@@ -20,6 +20,8 @@ Navigate to openframeworksRoot/myApps/ and clone this repository.
 
 Navigate to openframeworksRoot/addons/ and clone the ofxMidi repository (https://github.com/danomatika/ofxMidi)
 
+Use the project generator for your platform to generate a project to work with.
+
 Compile for your platform and make the improvements I never got around too, like midi show control and timecode.
 
 
