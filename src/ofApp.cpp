@@ -14,21 +14,15 @@ void ofApp::setup(){
     
     incomingPortOsc = xmlSettings.getValue("incomingPortOsc", 12345);
     outGoingPortOsc	= xmlSettings.getValue("outGoingPortOsc", 12344);
-    incomingPortMidi= xmlSettings.getValue("incomingPortMidi", 2);
-    outGoingPortMidi= xmlSettings.getValue("outGoingPortMidi", 1);
     midiOutChannel = xmlSettings.getValue("midiOutChannel", 1);
     outgoingIpOSC = xmlSettings.getValue("outgoingIpOSC", "127.0.0.1");
     frameRate = xmlSettings.getValue("frameRate", 1);
 
     ofSetFrameRate(frameRate);
     
-    
-    
-    midiOut.listPorts();
-    midiOut.openPort(outGoingPortMidi);
-    
-    midiIn.listPorts();
-    midiIn.openPort(incomingPortMidi);
+    midiOut.openVirtualPort("OSC_MIDI_OSC_OUT");
+   
+    midiIn.openVirtualPort("OSC_MIDI_OSC_IN");
     midiIn.ignoreTypes(false, false,false);
     midiIn.addListener(this);
     
@@ -306,8 +300,8 @@ void ofApp::newMidiMessage(ofxMidiMessage& msg) {
 void ofApp::draw(){
     ofSetColor(0);
     ofDrawBitmapString(message,10,10);
-    ofDrawBitmapString("Midi input on port " + ofToString(incomingPortMidi), 10, 25);
-    ofDrawBitmapString("Midi output on port " + ofToString(incomingPortMidi), 10, 40);
+    ofDrawBitmapString("Midi input on port " + midiIn.getName(), 10, 25);
+    ofDrawBitmapString("Midi output on port " + midiOut.getName(), 10, 40);
     ofDrawBitmapString("Osc input on port " + ofToString(incomingPortOsc), 10, 55);
     ofDrawBitmapString("Osc output on port " + ofToString(outGoingPortOsc), 10, 70);
     ofDrawBitmapString("Osc output to host " + ofToString(outgoingIpOSC), 10, 85);

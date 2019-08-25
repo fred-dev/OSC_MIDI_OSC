@@ -39,7 +39,7 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     ofxXmlSettings xmlSettings;
     
     int frameRate;
-    int incomingPortOsc, outGoingPortOsc, incomingPortMidi, outGoingPortMidi, midiOutChannel;
+    int incomingPortOsc, outGoingPortOsc, midiOutChannel;
     string outgoingIpOSC;
     
 		
