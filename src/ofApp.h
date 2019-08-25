@@ -27,12 +27,10 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     vector<unsigned char> sysexMMCMsg;
     
     
-		ofxOscReceiver receiver;
-		ofxMidiOut midiOut;
+    ofxOscReceiver receiver;
+    ofxMidiOut midiOut;
 	string message;
-    
     void newMidiMessage(ofxMidiMessage& eventArgs);
-    
     stringstream text;
     
     ofxMidiIn midiIn;
@@ -40,6 +38,7 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     ofxOscSender oscSend;
     ofxXmlSettings xmlSettings;
     
+    int frameRate;
     int incomingPortOsc, outGoingPortOsc, incomingPortMidi, outGoingPortMidi, midiOutChannel;
     string outgoingIpOSC;
     

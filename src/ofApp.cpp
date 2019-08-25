@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    ofSetVerticalSync(true);
+    
     ofBackground(255);
     ofSetLogLevel(OF_LOG_SILENT);
     
@@ -16,9 +16,11 @@ void ofApp::setup(){
     outGoingPortOsc	= xmlSettings.getValue("outGoingPortOsc", 12344);
     incomingPortMidi= xmlSettings.getValue("incomingPortMidi", 2);
     outGoingPortMidi= xmlSettings.getValue("outGoingPortMidi", 1);
-    midiOutChannel=   xmlSettings.getValue("midiOutChannel", 1);
-    outgoingIpOSC=    xmlSettings.getValue("outgoingIpOSC", "127.0.0.1");
-    
+    midiOutChannel = xmlSettings.getValue("midiOutChannel", 1);
+    outgoingIpOSC = xmlSettings.getValue("outgoingIpOSC", "127.0.0.1");
+    frameRate = xmlSettings.getValue("frameRate", 1);
+
+    ofSetFrameRate(frameRate);
     
     
     

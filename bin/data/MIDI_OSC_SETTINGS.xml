@@ -5,3 +5,4 @@
 <outGoingPortMidi>1</outGoingPortMidi>
 <midiOutChannel>1</midiOutChannel>
 <outgoingIpOSC>127.0.0.1</outgoingIpOSC>
+<frameRate>30<frameRate>
