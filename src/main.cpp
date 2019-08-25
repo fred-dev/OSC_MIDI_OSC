@@ -5,6 +5,9 @@
 int main( ){
 	ofSetupOpenGL(500,95,OF_WINDOW);			// <-------- setup the GL context
 
+	// limits framerate to 30 frames per second
+	ofSetFrameRate(30);
+	
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
 	// pass in width and height too:

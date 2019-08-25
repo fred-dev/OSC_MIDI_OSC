@@ -24,11 +24,11 @@ void ofApp::setup(){
     
     
     
-    midiOut.listPorts();
+    midiOut.listOutPorts();
     midiOut.openPort(outGoingPortMidi);
     
     midiIn.listPorts();
-    midiIn.openPort(incomingPortMidi);
+    midiIn.openInPort(incomingPortMidi);
     midiIn.ignoreTypes(false, false,false);
     midiIn.addListener(this);
     
