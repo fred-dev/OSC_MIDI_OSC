@@ -10,7 +10,7 @@ Windows 8+ 64 and 32 Bit releases available on the release tab.
 Linux has many requirements, see below, if you are looking for a fast and light solution for Linux this may not be for you, the openframeworks dependencies are kind of heavy as it 
 supports a lot of interesting tools.
 
-For OSX 10.13 or later the release does not seem to work, feel free to compile it yourself, or wait until I get around to upgrading.
+For OSX 10.14 or later the release does not seem to work, feel free to compile it yourself, or wait until I get around to upgrading.
 
 
 To compile and work with this code download openframeworks (for a fast setup go for a release from https://openframeworks.cc/download/)
