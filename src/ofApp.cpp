@@ -19,6 +19,16 @@ void ofApp::setup(){
         ofSetLogLevel(OF_LOG_VERBOSE);
         ofLogVerbose() << "Log level set to OF_LOG_VERBOSE" << endl;
     }
+#ifdef TARGET_OSX
+    if (!jsonSettings["useVirtualPort"].is_null()) {
+        useVirtualPort = jsonSettings["useVirtualPort"];
+        ofLogVerbose()<<"useVirtualPort set to "<<useVirtualPort<<endl;
+    } else {
+        useVirtualPort = true;
+    }
+#else
+    useVirtualPort = false;
+#endif
     //set the incomingPortOsc from the jsonSettings
     if (!jsonSettings["incomingPortOsc"].is_null()) {
         incomingPortOsc = jsonSettings["incomingPortOsc"];
@@ -100,29 +110,30 @@ void ofApp::setup(){
     
     //if we are on OSX we need to set the midi port to virtual
 #ifdef TARGET_OSX
-    midiOut.openVirtualPort("OSC_MIDI_OSC_OUT");
-    midiIn.openVirtualPort("OSC_MIDI_OSC_IN");
-    ofLogVerbose() << "Midi In Device set to OSC_MIDI_OSC_IN"  << endl;
-    ofLogVerbose() << "Midi Out Device set to OSC_MIDI_OSC_OUT" << endl;
-    
-    
+    if(useVirtualPort){
+        midiOut.openVirtualPort("OSC_MIDI_OSC_OUT");
+        midiIn.openVirtualPort("OSC_MIDI_OSC_IN");
+        ofLogVerbose() << "Midi In Device set to OSC_MIDI_OSC_IN - Virtual port"  << endl;
+        ofLogVerbose() << "Midi Out Device set to OSC_MIDI_OSC_OUT - Virtual port" << endl;
+    }
     //if we are on windows we need to set the midi port to the selected port
-#else
-    
-    if (midiOutDeviceByString) {
-        midiIn.openPort(midiInDeviceName);
-    } else {
-        midiIn.openPort(midiInDeviceNum);
-    }
-    ofLogVerbose() << "Midi In Device initialised and set to port: " << midiIn.getPort() << " With name: "<<  midiIn.getName() << endl;
-    if (midiOutDeviceByString) {
-        midiOut.openPort(midiOutDeviceName);
-    } else {
-        midiOut.openPort(midiOutDeviceNum);
-    }
-    ofLogVerbose() << "Midi Out Device initialised and set to port: " << midiOut.getPort() << " With name: " << midiOut.getName() << endl;
-    
 #endif
+    if(!useVirtualPort){
+        if (midiOutDeviceByString) {
+            midiIn.openPort(midiInDeviceName);
+        } else {
+            midiIn.openPort(midiInDeviceNum);
+        }
+        ofLogVerbose() << "Midi In Device initialised and set to port: " << midiIn.getPort() << " With name: "<<  midiIn.getName() << endl;
+        if (midiOutDeviceByString) {
+            midiOut.openPort(midiOutDeviceName);
+        } else {
+            midiOut.openPort(midiOutDeviceNum);
+        }
+        ofLogVerbose() << "Midi Out Device initialised and set to port: " << midiOut.getPort() << " With name: " << midiOut.getName() << endl;
+    }
+    
+    
     
     midiIn.listInPorts();
     midiOut.listOutPorts();

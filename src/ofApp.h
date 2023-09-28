@@ -44,7 +44,7 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     int frameRate;
     int incomingPortOsc, outGoingPortOsc, midiInChannel, midiOutChannel, midiInDeviceNum, midiOutDeviceNum;
     string outgoingIpOSC, midiInDeviceName, midiOutDeviceName;
-	bool midiInDeviceByString, midiOutDeviceByString;
+	bool midiInDeviceByString, midiOutDeviceByString, useVirtualPort;
     
 		
 };

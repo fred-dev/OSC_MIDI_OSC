@@ -9,8 +9,7 @@
         "Euphonix MIDI Euphonix Port 1",
         "Euphonix MIDI Euphonix Port 2",
         "Euphonix MIDI Euphonix Port 3",
-        "Euphonix MIDI Euphonix Port 4",
-        "OSC_MIDI_OSC_OUT"
+        "Euphonix MIDI Euphonix Port 4"
     ],
     "midiOutChannel": 1,
     "midiOutDevice": 9,
@@ -19,9 +18,9 @@
         "Euphonix MIDI Euphonix Port 1",
         "Euphonix MIDI Euphonix Port 2",
         "Euphonix MIDI Euphonix Port 3",
-        "Euphonix MIDI Euphonix Port 4",
-        "OSC_MIDI_OSC_IN"
+        "Euphonix MIDI Euphonix Port 4"
     ],
     "outGoingPortOsc": 1234,
-    "outgoingIpOSC": "127.0.0.1"
+    "outgoingIpOSC": "127.0.0.1",
+    "useVirtualPort": false
 }
