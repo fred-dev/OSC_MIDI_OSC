@@ -3,8 +3,6 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxMidi.h"
-#include "ofxXmlSettings.h"
-
 
 class ofApp : public ofBaseApp, public ofxMidiListener {
 
@@ -38,13 +36,19 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     ofxOscSender oscSend;
 
     ofJson jsonSettings;
-
-    ofxXmlSettings xmlSettings;
     
     int frameRate;
     int incomingPortOsc, outGoingPortOsc, midiInChannel, midiOutChannel, midiInDeviceNum, midiOutDeviceNum;
     string outgoingIpOSC, midiInDeviceName, midiOutDeviceName;
 	bool midiInDeviceByString, midiOutDeviceByString, useVirtualPort;
+
+    string getMidiShowControlCommandType(uint8_t byte);
+	string getMidiShowControTargetType(uint8_t byte);
+	uint8_t getDeviceIdByte(ofxMidiMessage midiMessage);
+    int getMidiShowControldeviceId(uint8_t byte);
+	std::vector<int> getMidiShowControlCommandData(ofxMidiMessage midiMessage);
+
+
     
 		
 };
