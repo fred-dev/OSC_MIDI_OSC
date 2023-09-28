@@ -120,14 +120,44 @@ void ofApp::setup(){
 #endif
     if(!useVirtualPort){
         if (midiOutDeviceByString) {
+            //check if the device name is in the list of devices and if not set to the first device
+            if (std::find(midiOut.getOutPortList().begin(), midiOut.getOutPortList().end(), midiOutDeviceName) != midiOut.getOutPortList().end()) {
+				midiOut.openPort(midiOutDeviceName);
+                //let the user know that the device name is not valid
+                ofLogVerbose() << "Midi Out Device name is not valid, setting to first device" << endl;
+            }
+            else {
+				midiOut.openPort(0);
+			}
             midiIn.openPort(midiInDeviceName);
         } else {
+            //check if the device number is possible (less than the number of devices) and if not set to the first device
+            if (midiOutDeviceNum > midiOut.getNumOutPorts()) {
+				midiOutDeviceNum = 0;
+                //let the user know that the device number is not valid
+                ofLogVerbose() << "Midi Out Device number is not valid, setting to first device" << endl;
+			}
+
             midiIn.openPort(midiInDeviceNum);
         }
         ofLogVerbose() << "Midi In Device initialised and set to port: " << midiIn.getPort() << " With name: "<<  midiIn.getName() << endl;
         if (midiOutDeviceByString) {
-            midiOut.openPort(midiOutDeviceName);
+            //check if the device name is in the list of devices and if not set to the first device
+            if (std::find(midiOut.getOutPortList().begin(), midiOut.getOutPortList().end(), midiOutDeviceName) != midiOut.getOutPortList().end()) {
+                  midiOut.openPort(0);
+				//let the user know that the device name is not valid
+				ofLogVerbose() << "Midi Out Device name is not valid, setting to first device" << endl;
+            } else {
+				midiOut.openPort(midiOutDeviceName);
+
+			}
         } else {
+            //check if the device number is possible (less than the number of devices) and if not set to the first device
+            if (midiOutDeviceNum > midiOut.getNumOutPorts()) {
+                midiOutDeviceNum = 0;
+				//let the user know that the device number is not valid
+				ofLogVerbose() << "Midi Out Device number is not valid, setting to first device" << endl;
+            }
             midiOut.openPort(midiOutDeviceNum);
         }
         ofLogVerbose() << "Midi Out Device initialised and set to port: " << midiOut.getPort() << " With name: " << midiOut.getName() << endl;
@@ -137,9 +167,12 @@ void ofApp::setup(){
     
     midiIn.listInPorts();
     midiOut.listOutPorts();
+    
     //save a list of midi in ports to the json file
+    ofLogVerbose() << "Adding Midi In Ports to json file" << endl;
     jsonSettings["midiInPorts"] = midiIn.getInPortList();
     //save a list of midi out ports to the json file
+    ofLogVerbose() << "Adding Midi Out Ports to json file" << endl;
     jsonSettings["midiOutPorts"] = midiOut.getOutPortList();
     //save the json file
     ofSavePrettyJson("MIDI_OSC_SETTINGS.json", jsonSettings);
@@ -148,7 +181,9 @@ void ofApp::setup(){
     midiIn.addListener(this);
     
     oscSend.setup(outgoingIpOSC, outGoingPortOsc);
+    ofLogVerbose() << "OSC Sender initialised and set to port: " << oscSend.getPort() << " With host: " << oscSend.getHost() << endl;
     receiver.setup(incomingPortOsc);
+    ofLogVerbose() << "OSC Receiver initialised and set to port: " << receiver.getPort() << endl;
     message="No messages yet";
     
     
