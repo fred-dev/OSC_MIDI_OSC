@@ -19,6 +19,7 @@ docs/*
 
 # bin/data Folder
 example*/bin/data/*
+/bin
 !example*/bin/data/MIDI_OSC_SETTINGS.json
 
 # Project files
