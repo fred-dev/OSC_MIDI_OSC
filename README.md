@@ -3,15 +3,12 @@
 A simple cross platform OSC to Midi and Midi to OSC convertor made with Made with openframeworks (https://github.com/openframeworks/openFrameworks)  
 using ofxMidi (https://github.com/danomatika/ofxMidi)
 
-MAC OS 10.10+ (ish) 64 bit release available on the release tab.
+MAC OS 10.15+ (ish) 64 bit release available on the release tab.
 
-Windows 8+ 64 and 32 Bit releases available on the release tab.
+Windows 10+ 64 Bit release available on the release tab.
 
 Linux has many requirements, see below, if you are looking for a fast and light solution for Linux this may not be for you, the openframeworks dependencies are kind of heavy as it 
 supports a lot of interesting tools.
-
-For OSX 10.13 or later the release does not seem to work, feel free to compile it yourself, or wait until I get around to upgrading.
-
 
 To compile and work with this code download openframeworks (for a fast setup go for a release from https://openframeworks.cc/download/)
 Follow the instructions for setting up openframeworks on your platform.
@@ -25,9 +22,9 @@ Use the project generator for your platform to generate a project to work with.
 Compile for your platform and make the improvements I never got around too, like midi show control and timecode.
 
 
-To configure the app go to the data folder and edit the MIDI_OSC_SETTINGS.xml file. 
+To configure the app go to the data folder and edit the MIDI_OSC_SETTINGS.json file. 
 
-You can set the incoming and outgoing midi and OSC ports and the destination IP.
+You can set the incoming and outgoing midi and OSC ports and the destination IP. Midi ports can be virtual (OSX only) and can also be a number or the midi port name (names must match exactly). To get a complte list of ports run the app once, it will save the available in and out ports to the json file.
 
 The OSC format is the same for sending and receiving. 
 
