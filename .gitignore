@@ -19,7 +19,7 @@ docs/*
 
 # bin/data Folder
 example*/bin/data/*
-!example*/bin/data/data.txt
+!example*/bin/data/MIDI_OSC_SETTINGS.json
 
 # Project files
 example*/*
@@ -66,6 +66,10 @@ __*/*
 # Temporary files.
 *.autosave
 
+#WIN
+.vs/
+obj/
 # OSX
 .DS_Store
 .AppleDouble
+

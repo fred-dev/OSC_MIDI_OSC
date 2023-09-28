@@ -36,11 +36,15 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     ofxMidiIn midiIn;
     ofxMidiMessage midiMessage;
     ofxOscSender oscSend;
+
+    ofJson jsonSettings;
+
     ofxXmlSettings xmlSettings;
     
     int frameRate;
-    int incomingPortOsc, outGoingPortOsc, midiOutChannel;
-    string outgoingIpOSC;
+    int incomingPortOsc, outGoingPortOsc, midiInChannel, midiOutChannel, midiInDeviceNum, midiOutDeviceNum;
+    string outgoingIpOSC, midiInDeviceName, midiOutDeviceName;
+	bool midiInDeviceByString, midiOutDeviceByString;
     
 		
 };
