@@ -3,6 +3,9 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxMidi.h"
+#include "ofxGui.h"
+#include "ofxDropdown.h"
+#include "MSCConstants.h"
 
 class ofApp : public ofBaseApp, public ofxMidiListener {
 
@@ -48,7 +51,12 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     int getMidiShowControldeviceId(uint8_t byte);
 	std::vector<int> getMidiShowControlCommandData(ofxMidiMessage midiMessage);
 
+    ofxPanel gui;
+  
+    ofxDropdown_<string> midiInputDropdown {"Midi_inputs"};
+    ofxDropdown_<string> midiOutputDropdown {"Midi_outputs"};
 
-    
+    void changeMidiInput(string & input);
+    void changeMidiOutput(string & ouput);
 		
 };
