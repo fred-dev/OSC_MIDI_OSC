@@ -1,6 +1,7 @@
 # Ignore all files by default
 *
 
+
 # Allow directories and files
 !/src/
 !/addons.make
