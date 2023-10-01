@@ -49,27 +49,7 @@ void SettingsManager::loadSettings(const std::string& filename) {
         settings["useVirtualPort"] = false;
         ofLogVerbose("loadSettings") << "useVirtualPort, unavailable on windows, now set to " << settings["useVirtualPort"] << endl;
     #endif
-        //set the incomingPortOsc from the settings
-        if (!settings["incomingPortOsc"].is_null()) {
-            ofLogVerbose("loadSettings") << "incomingPortOsc set to " << settings["incomingPortOsc"] << endl;
-        } else {
-            settings["incomingPortOsc"] = 12345;
-            ofLogVerbose("loadSettings fallback") << "incomingPortOsc set to " << settings["incomingPortOsc"] << endl;
-
-        }
-        if (!settings["outGoingPortOsc"].is_null()) {
-            ofLogVerbose("loadSettings") << "outGoingPortOsc set to " << outGoingPortOsc << endl;
-        } else {
-            settings["outGoingPortOsc"] = 1234;
-            ofLogVerbose("loadSettings fallback") << "outGoingPortOsc set to " << outGoingPortOsc << endl;
-        }
         
-        if (!settings["outgoingIpOSC"].is_null()) {
-            ofLogVerbose("loadSettings") << "outgoingIpOSC set to " << outgoingIpOSC << endl;
-        } else {
-            settings["outgoingIpOSC"] = "127.0.0.1";
-            ofLogVerbose("loadSettings fallback") << "outgoingIpOSC set to " << outgoingIpOSC << endl
-        }
         
         if (!settings["midiInDevice"].is_null()) {
             if (settings["midiInDevice"].is_number()) {
@@ -111,6 +91,28 @@ void SettingsManager::loadSettings(const std::string& filename) {
         } else {
             settings["midiInChannel"] = 1;
             ofLogVerbose("loadSettings fallback") << "midiInChannel set to " << settings["midiInChannel"] << endl;
+        }
+        
+        //set the incomingPortOsc from the settings
+        if (!settings["incomingPortOsc"].is_null()) {
+            ofLogVerbose("loadSettings") << "incomingPortOsc set to " << settings["incomingPortOsc"] << endl;
+        } else {
+            settings["incomingPortOsc"] = 12345;
+            ofLogVerbose("loadSettings fallback") << "incomingPortOsc set to " << settings["incomingPortOsc"] << endl;
+
+        }
+        if (!settings["outGoingPortOsc"].is_null()) {
+            ofLogVerbose("loadSettings") << "outGoingPortOsc set to " << outGoingPortOsc << endl;
+        } else {
+            settings["outGoingPortOsc"] = 1234;
+            ofLogVerbose("loadSettings fallback") << "outGoingPortOsc set to " << outGoingPortOsc << endl;
+        }
+        
+        if (!settings["outgoingIpOSC"].is_null()) {
+            ofLogVerbose("loadSettings") << "outgoingIpOSC set to " << outgoingIpOSC << endl;
+        } else {
+            settings["outgoingIpOSC"] = "127.0.0.1";
+            ofLogVerbose("loadSettings fallback") << "outgoingIpOSC set to " << outgoingIpOSC << endl
         }
         
         if (!settings["frameRate"].is_null()) {

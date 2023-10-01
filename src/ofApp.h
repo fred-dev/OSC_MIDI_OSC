@@ -5,7 +5,6 @@
 #include "ofxMidi.h"
 #include "ofxGui.h"
 #include "ofxDropdown.h"
-#include "MSCConstants.h"
 
 class ofApp : public ofBaseApp, public ofxMidiListener {
 
@@ -23,9 +22,7 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    void buildSysExMMCMessage(char ID);
     
-    vector<unsigned char> sysexMMCMsg;
     
     
     ofxOscReceiver receiver;
@@ -38,18 +35,8 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     ofxMidiMessage midiMessage;
     ofxOscSender oscSend;
 
-    ofJson jsonSettings;
-    
-    int frameRate;
-    int incomingPortOsc, outGoingPortOsc, midiInChannel, midiOutChannel, midiInDeviceNum, midiOutDeviceNum;
-    string outgoingIpOSC, midiInDeviceName, midiOutDeviceName;
-	bool midiInDeviceByString, midiOutDeviceByString, useVirtualPort;
 
-    string getMidiShowControlCommandType(uint8_t byte);
-	string getMidiShowControTargetType(uint8_t byte);
-	uint8_t getDeviceIdByte(ofxMidiMessage midiMessage);
-    int getMidiShowControldeviceId(uint8_t byte);
-	std::vector<int> getMidiShowControlCommandData(ofxMidiMessage midiMessage);
+
 
     ofxPanel gui;
   
