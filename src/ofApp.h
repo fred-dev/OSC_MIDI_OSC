@@ -1,15 +1,50 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxOsc.h"
-#include "ofxMidi.h"
-#include "ofxGui.h"
-#include "ofxDropdown.h"
-#include "MSCConstants.h"
+#include "SettingsManager.h"
+#include "MidiManager.h"
+#include "OscManager.h"
+#include "ofxTextInputField.h"
+#include "simpleButton.h"
+#include "Mode.h"
+#include "modes/ModeManager.h"
+#include "modes/MidiInSetupMode.h"
+#include "modes/MidiOutSetupMode.h"
+#include "modes/OscInSetupMode.h"
+#include "modes/OscOutSetupMode.h"
+#include "modes/ConversionMode.h"
 
-class ofApp : public ofBaseApp, public ofxMidiListener {
 
-	public:
+
+enum OperationMode {
+    MODE_SETTING_MIDI_IN,
+    MODE_SETTING_MIDI_OUT,
+    MODE_SETTING_OSC_IN,
+    MODE_SETTING_OSC_OUT,
+    MODE_CONVERSION
+};
+
+enum buttonMesssages {
+    BTN_MSG_MIDI_IN_PORT_SET,
+    BTN_MSG_MIDI_IN_CHANNEL_SET,
+    BTN_MSG_MIDI_OUT_PORT_SET,
+    BTN_MSG_MIDI_OUT_CHANNEL_SET,
+    BTN_MSG_OSC_IN_PORT_SET,
+    BTN_MSG_OST_OUT_PORT_SET,
+    BTN_MSG_OST_OUT_IP_SET,
+    BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_IN,
+    BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_OUT,
+    BTN_MSG_GOTOMODE_MODE_SETTING_OSC_IN,
+    BTN_MSG_GOTOMODE_MODE_SETTING_OSC_OUT,
+    BTN_MSG_GOTOMODE_MODE_CONVERSION
+};
+
+
+const int MAX_MIDI_CHANNEL = 16;
+
+class ofApp : public ofBaseApp {
+
+    public:
 		void setup();
 		void update();
 		void draw();
@@ -21,42 +56,49 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
 		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    void buildSysExMMCMessage(char ID);
     
-    vector<unsigned char> sysexMMCMsg;
+        SettingsManager& settingsManager = SettingsManager::getInstance();
+        MidiManager& midiManager = MidiManager::getInstance();
+        OscManager& oscManager = OscManager::getInstance();
+        ofJson appSettings;
+        
+        std::string activityMessage;
     
     
-    ofxOscReceiver receiver;
-    ofxMidiOut midiOut;
-	string message;
-    void newMidiMessage(ofxMidiMessage& eventArgs);
-    stringstream text;
-    
-    ofxMidiIn midiIn;
-    ofxMidiMessage midiMessage;
-    ofxOscSender oscSend;
+    std::vector<std::string> midiInPortList;
+    std::vector<std::string> midiOutPortList;
+    int selectedInPort, selectedOutPort;
 
-    ofJson jsonSettings;
+    ofTrueTypeFont font;
+    // Helper function to handle port selection
+
+    ModeManager modeManager; // If you have a separate class for ModeManager
+
+	std::shared_ptr<Mode> midiInSetupMode;
+	std::shared_ptr<Mode> midiOutSetupMode;
+	std::shared_ptr<Mode> oscInSetupMode;
+	std::shared_ptr<Mode> oscOutSetupMode;
+	std::shared_ptr<Mode> conversionMode;
+
+
+
     
-    int frameRate;
-    int incomingPortOsc, outGoingPortOsc, midiInChannel, midiOutChannel, midiInDeviceNum, midiOutDeviceNum;
-    string outgoingIpOSC, midiInDeviceName, midiOutDeviceName;
-	bool midiInDeviceByString, midiOutDeviceByString, useVirtualPort;
-
-    string getMidiShowControlCommandType(uint8_t byte);
-	string getMidiShowControTargetType(uint8_t byte);
-	uint8_t getDeviceIdByte(ofxMidiMessage midiMessage);
-    int getMidiShowControldeviceId(uint8_t byte);
-	std::vector<int> getMidiShowControlCommandData(ofxMidiMessage midiMessage);
-
-    ofxPanel gui;
+    std::unordered_map<std::string, int> buttonMessagesMap = {
+        {"BTN_MSG_MIDI_IN_PORT_SET", 0},
+        {"BTN_MSG_MIDI_IN_CHANNEL_SET", 1},
+        {"BTN_MSG_MIDI_OUT_PORT_SET", 2},
+        {"BTN_MSG_MIDI_OUT_CHANNEL_SET", 3},
+        {"BTN_MSG_OSC_IN_PORT_SET", 4},
+        {"BTN_MSG_OST_OUT_PORT_SET", 5},
+        {"BTN_MSG_OST_OUT_IP_SET", 6},
+        {"BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_IN", 7},
+        {"BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_OUT", 8},
+        {"BTN_MSG_GOTOMODE_MODE_SETTING_OSC_IN", 9},
+        {"BTN_MSG_GOTOMODE_MODE_SETTING_OSC_OUT", 10},
+        {"BTN_MSG_GOTOMODE_MODE_CONVERSION", 11}
+    };
+	
   
-    ofxDropdown_<string> midiInputDropdown {"Midi_inputs"};
-    ofxDropdown_<string> midiOutputDropdown {"Midi_outputs"};
-
-    void changeMidiInput(string & input);
-    void changeMidiOutput(string & ouput);
-		
 };
+

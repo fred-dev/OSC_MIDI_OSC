@@ -1,4 +1,4 @@
-ofxDropdown
-ofxGui
+ofxMSAInteractiveObject
 ofxMidi
 ofxOsc
+ofxTextInputField
