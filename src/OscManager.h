@@ -25,6 +25,10 @@ public:
     void operator=(OscManager&&) = delete;
     
     void setup();
+    void closeReceiver();
+    void setupReceiver();
+    void closeSender();
+    void setupSender();
     
     ofxOscSender& getOSCSender() { return oscSender; }
     ofxOscReceiver& getOscReciever() { return oscReceiver; }

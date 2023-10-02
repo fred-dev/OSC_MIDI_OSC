@@ -13,6 +13,7 @@
 class ConversionMode : public Mode {
 private:
 	std::string title;
+    std::string activityMessage = "Waiting for input......";
 
 public:
 	ConversionMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
@@ -23,6 +24,7 @@ public:
 	void update() override;
 	void exit() override;
 	void keyPressed(int key) override{ }
+    void gotMessage(ofMessage & msg);
 
 	void _keyPressed(ofKeyEventArgs & e);
 

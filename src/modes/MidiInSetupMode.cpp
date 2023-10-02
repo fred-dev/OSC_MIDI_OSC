@@ -10,13 +10,17 @@
 
 MidiInSetupMode::MidiInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
 	: Mode(fontRef, settingsRef) { 
-	saveMidiInPortSettings.setup("Save midi in port settings", "BTN_MSG_MIDI_IN_PORT_SET");
-	saveMidiInPortSettings.set(200, 200, 200, 20);
+	saveMidiInPortSettings.setup("Set midi in port", "BTN_MSG_MIDI_IN_PORT_SET");
+	saveMidiInPortSettings.set(30, 175, 140, 20);
 	saveMidiInPortSettings.disableAllEvents();
 
-	saveMidiInChannelSettings.setup("Save midi in channel settings", "BTN_MSG_MIDI_IN_CHANNEL_SET");
-	saveMidiInChannelSettings.set(200, 200, 200, 20);
+	saveMidiInChannelSettings.setup("Set midi in channel", "BTN_MSG_MIDI_IN_CHANNEL_SET");
+	saveMidiInChannelSettings.set(200, 175, 140, 20);
 	saveMidiInChannelSettings.disableAllEvents();
+        
+    GoToConversionMode.setup("Exit settings", "BTN_MSG_GOTOMODE_MODE_CONVERSION");
+    GoToConversionMode.set(370, 175, 135, 20);
+    GoToConversionMode.disableAllEvents();
 }
 
 MidiInSetupMode::~MidiInSetupMode() {}
@@ -25,11 +29,13 @@ void MidiInSetupMode::setup() {
 
 	saveMidiInPortSettings.enableAllEvents();
 	saveMidiInChannelSettings.enableAllEvents();
+    GoToConversionMode.enableAllEvents();
 	ofAddListener(ofEvents().keyPressed, this, &MidiInSetupMode::_keyPressed);
 }
 
 void MidiInSetupMode::draw() {
 	font.drawString(title, 10, 15);
+    font.drawString("Use the up & down keys to set the port and the < and > to set the channel", 10, 35);
 
 	// Draw the list of ports and highlight the selected one
 	for (int i = 0; i < settings["allInPorts"].size(); i++) {
@@ -41,13 +47,13 @@ void MidiInSetupMode::draw() {
 			ofSetColor(0);
 		}
 
-		font.drawString(settings["allInPorts"][i], 10, 30 + (i * 15));
+		font.drawString(settings["allInPorts"][i], 10, 55 + (i * 20));
 		ofPopStyle();
 	}
 
 	// Draw the midi channel to the right of these messages
 	ofSetColor(0);
-	font.drawString("Midi channel set to: " + ofToString(settings["midiInChannel"]), 320, 30);
+	font.drawString("Midi channel set to: " + ofToString(settings["midiInChannel"]), 320, 55);
 }
 
 void MidiInSetupMode::update() {
@@ -57,6 +63,7 @@ void MidiInSetupMode::update() {
 void MidiInSetupMode::exit() {
 	saveMidiInPortSettings.disableAllEvents();
 	saveMidiInChannelSettings.disableAllEvents();
+    GoToConversionMode.disableAllEvents();
 	ofRemoveListener(ofEvents().keyPressed, this, &MidiInSetupMode::_keyPressed);
 }
 
@@ -95,4 +102,15 @@ void MidiInSetupMode::selectChannel(ofJson & channel, int direction) {
 	int newChannel = ofClamp(channel.get<int>() + direction, 1, 16);
 
 	channel = newChannel;
+}
+void MidiInSetupMode::saveMidiInPort(){
+    settings["midiInDeviceName"] =  settings["inPortLabel"];
+    settings["midiInDevice"] =  settings["inPortLabel"];
+    settings["midiInDeviceByString"] =  true;
+    
+
+}
+
+void MidiInSetupMode::saveMidiInChannel(){
+    settings["midiInChannel"];
 }

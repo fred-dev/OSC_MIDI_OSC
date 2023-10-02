@@ -26,6 +26,7 @@ public:
     MidiManager(MidiManager const&) = delete;
     void operator=(MidiManager const&) = delete;
     void setup();
+    void close();
     ofxMidiOut& getMidiOut() { return midiOut; }
     ofxMidiIn& getMidiIn() { return midiIn; }
     

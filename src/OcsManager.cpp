@@ -22,7 +22,24 @@ void OscManager::setup() {
 	oscReceiver.setup(oscManagerSettings["incomingPortOsc"]);
 	ofLogVerbose() << "OSC Receiver initialised and set to port: " << oscReceiver.getPort() << endl;
 }
+void OscManager::closeReceiver(){
+    oscReceiver.stop();
+}
+void OscManager::setupReceiver(){
+    oscReceiver.setup(oscManagerSettings["incomingPortOsc"]);
+    ofLogVerbose() << "OSC Receiver initialised and set to port: " << oscReceiver.getPort() << endl;
+    oscReceiver.start();
 
+}
+void OscManager::closeSender(){
+    oscSender.clear();
+    
+}
+void OscManager::setupSender(){
+    oscSender.setup(oscManagerSettings["outgoingIpOSC"], oscManagerSettings["outGoingPortOsc"]);
+    ofLogVerbose() << "OSC Sender initialised and set to port: " << oscSender.getPort() << " With host: " << oscSender.getHost() << endl;
+
+}
 void OscManager::handleIncomingMessages() {
     MidiManager& midiManager = MidiManager::getInstance();
     ofxMidiOut& midiOut = midiOut;

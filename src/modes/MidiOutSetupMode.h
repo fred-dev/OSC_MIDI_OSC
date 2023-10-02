@@ -10,7 +10,7 @@
 
 class MidiOutSetupMode : public Mode {
 private:
-	std::string title;
+    std::string title = "MIDI out setup";;
 
 public:
 	MidiOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
@@ -25,6 +25,8 @@ public:
 	void _keyPressed(ofKeyEventArgs & e);
 	simpleButton saveMidiOutPortSettings;
 	simpleButton saveMidiOutChannelSettings;
+    simpleButton GoToConversionMode;
+    
 	void selectPort(ofJson & ports, ofJson & currentPort, int direction);
 	void selectChannel(ofJson & channel, int direction);
 };

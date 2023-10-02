@@ -8,9 +8,9 @@
 #pragma once
 #include "ofxMSAInteractiveObject.h"
 
-#define IDLE_COLOR 0x60ACE6
-#define OVER_COLOR 0xE6643E
-#define DOWN_COLOR 0xFF0000
+#define IDLE_COLOR 0x000000
+#define OVER_COLOR 0xDA1884
+#define DOWN_COLOR 0x6A1CB0
 
 class simpleButton : public ofxMSAInteractiveObject {
 public:
@@ -24,7 +24,7 @@ public:
 
 		buttonLabel = label;
 		buttonMessage = message;
-		drawFont.load("Gaultier-Regular.ttf", 12);
+		drawFont.load("frabk.ttf", 12);
 	}
 
 	void exit() {
@@ -46,7 +46,7 @@ public:
 
 		ofNoFill();
 		ofDrawRectRounded(x, y, width, height, 12 / 2);
-		//drawFont.drawString(buttonLabel, x + ((width - drawFont.getStringBoundingBox(buttonLabel, 0, 0).getWidth()) / 2), y + ((height - drawFont.getStringBoundingBox(buttonLabel, 0, 0).getHeight()) / 2) + drawFont.getStringBoundingBox(buttonLabel, 0, 0).getHeight());
+		drawFont.drawString(buttonLabel, x + ((width - drawFont.getStringBoundingBox(buttonLabel, 0, 0).getWidth()) / 2), y + ((height - drawFont.getStringBoundingBox(buttonLabel, 0, 0).getHeight()) / 2) + drawFont.getStringBoundingBox(buttonLabel, 0, 0).getHeight());
 
 		ofPopStyle();
 	}

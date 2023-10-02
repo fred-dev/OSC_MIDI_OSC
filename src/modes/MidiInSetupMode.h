@@ -13,7 +13,7 @@
 
 class MidiInSetupMode : public Mode {
 private:
-	std::string title;
+    std::string title = "MIDI in setup";
 
 
 public:
@@ -29,8 +29,12 @@ public:
 	void _keyPressed(ofKeyEventArgs & e);
 	simpleButton saveMidiInPortSettings;
 	simpleButton saveMidiInChannelSettings;
+    simpleButton GoToConversionMode;
 	void selectPort(ofJson & ports, ofJson & currentPort, int direction);
 	void selectChannel(ofJson & channel, int direction);
+    void saveMidiInPort();
+    void saveMidiInChannel();
+
 };
 
 

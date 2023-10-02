@@ -12,29 +12,29 @@ OscOutSetupMode::OscOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
 	oscOutPortField.setup();
 	oscOutPortField.text = ofToString(settings["outGoingPortOsc"]);
 	oscOutPortField.bounds.x = 10;
-	oscOutPortField.bounds.y = 30;
-	oscOutPortField.bounds.height = 15;
-	oscOutPortField.bounds.width = 188;
+	oscOutPortField.bounds.y = 35;
+	oscOutPortField.bounds.height = font.getStringBoundingBox("1", 0, 0).height;
+    oscOutPortField.bounds.width = font.getStringBoundingBox(ofToString(settings["outGoingPortOsc"]), 0, 0).width + 30;
 	oscOutPortField.setFont(font);
 
 	oscOutIPField.setup();
 	oscOutIPField.text = settings["outgoingIpOSC"];
 	oscOutIPField.bounds.x = 10;
-	oscOutIPField.bounds.y = 45;
-	oscOutIPField.bounds.height = 15;
-	oscOutIPField.bounds.width = 188;
+	oscOutIPField.bounds.y = 50;
+	oscOutIPField.bounds.height = font.getStringBoundingBox("1", 0, 0).height;
+    oscOutIPField.bounds.width = font.getStringBoundingBox(ofToString(settings["outgoingIpOSC"]), 0, 0).width + 30;;
 	oscOutIPField.setFont(font);
 
-	saveOSCOutPortSettings.setup("Save OSC in port settings", "BTN_MSG_OSC_IN_PORT_SET");
-	saveOSCOutPortSettings.set(200, 200, 200, 20);
+	saveOSCOutPortSettings.setup("Set OSC out port", "BTN_MSG_OST_OUT_PORT_SET");
+	saveOSCOutPortSettings.set(30, 175, 140, 20);
 	saveOSCOutPortSettings.disableAllEvents();
 
-	saveOSCOutIptSettings.setup("Save OSC in port settings", "BTN_MSG_OSC_IN_PORT_SET");
-	saveOSCOutIptSettings.set(200, 200, 200, 20);
+	saveOSCOutIptSettings.setup("Set OSC IP port", "BTN_MSG_OST_OUT_IP_SET");
+	saveOSCOutIptSettings.set(200, 175, 140, 20);
 	saveOSCOutIptSettings.disableAllEvents();
 
-	GoToConversionMode.setup("Conversion mode", "BTN_MSG_GOTOMODE_MODE_CONVERSION");
-	GoToConversionMode.set(200, 200, 200, 20);
+	GoToConversionMode.setup("Exit settings", "BTN_MSG_GOTOMODE_MODE_CONVERSION");
+	GoToConversionMode.set(370, 175, 140, 20);
 	GoToConversionMode.disableAllEvents();
 }
 
@@ -53,12 +53,14 @@ void OscOutSetupMode::setup() {
 
 void OscOutSetupMode::draw() {
 	font.drawString("OSC out settings", 10, 15);
+    
 	ofSetColor(0);
-	ofRectangle(oscOutPortField.bounds);
-	ofNoFill();
+    ofNoFill();
+    
+	ofDrawRectangle(oscOutPortField.bounds);
 	oscOutPortField.draw();
-	ofRectangle(oscOutIPField.bounds);
-	ofNoFill();
+    
+    ofDrawRectangle(oscOutIPField.bounds);
 	oscOutIPField.draw();
 }
 
@@ -68,9 +70,10 @@ void OscOutSetupMode::update() {
 
 void OscOutSetupMode::exit() {
 	oscOutPortField.disable();
-	oscOutIPField.enable();
+	oscOutIPField.disable();
 	saveOSCOutPortSettings.disableAllEvents();
 	saveOSCOutIptSettings.disableAllEvents();
+    GoToConversionMode.disableAllEvents();
 	ofRemoveListener(oscOutPortField.onTextChange, this, &OscOutSetupMode::onOSCOutputPortEditied);
 	ofRemoveListener(oscOutIPField.onTextChange, this, &OscOutSetupMode::onOSCOutputIPEditied);
 }
@@ -78,13 +81,12 @@ void OscOutSetupMode::exit() {
 
 void OscOutSetupMode::_keyPressed(ofKeyEventArgs & e) {
 	int key = e.key;
-	ofLogVerbose("OscOutSetupMode") << "keyPressed: " << key;
 }
 
 void OscOutSetupMode::onOSCOutputIPEditied(string& message) {
-
+    settings["outgoingIpOSC"] = message;
 }
 
 void OscOutSetupMode::onOSCOutputPortEditied(string& message) {
-
+    settings["outGoingPortOsc"] = ofToInt(message);
 }

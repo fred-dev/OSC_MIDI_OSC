@@ -87,6 +87,11 @@ void MidiManager::setup(){
     
 
 }
+void MidiManager::close(){
+    midiIn.closePort();
+    midiIn.removeListener(this);
+    midiOut.closePort();
+}
 void MidiManager::newMidiMessage(ofxMidiMessage& msg) {
     
     midiMessage = msg;
