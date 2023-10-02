@@ -24,13 +24,12 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() {
     modeManager.update();
-   
+    oscManager.handleIncomingMessages();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
     modeManager.draw();
-	//font.drawString(activityMessage, 10, 15);
 }
 
 //--------------------------------------------------------------

@@ -46,7 +46,7 @@ void OscManager::setupSender(){
 }
 void OscManager::handleIncomingMessages() {
     MidiManager& midiManager = MidiManager::getInstance();
-    ofxMidiOut& midiOut = midiOut;
+    ofxMidiOut& midiOut = midiManager.getMidiOut();
 
     while (oscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
