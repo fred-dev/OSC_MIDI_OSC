@@ -1,2 +1,4 @@
+ofxMSAInteractiveObject
 ofxMidi
 ofxOsc
+ofxTextInputField

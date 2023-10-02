@@ -89,7 +89,7 @@ void OscManager::handleIncomingMessages() {
             midiOut.sendMidiBytes(midiBytes);
             message = "Sending MMC Command: " + command + " DeviceID: " + ofToString(deviceId);
         }
-        
+        ofSendMessage(message);
     }
 }
 

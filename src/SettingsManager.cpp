@@ -156,6 +156,17 @@ void SettingsManager::setDefaultSettings() {
     ofLogVerbose("SettingsManager::setDefaultSettings") << "frameRate set to " << settings["frameRate"] << endl;
 }
 
+void SettingsManager::saveSettings(const std::string& filename, ofJson remoteSettings){
+    settings = remoteSettings;
+    
+    ofLogVerbose("SettingsManager::saveSettings") << "Saving settings to " << filename << endl;
+    ofSavePrettyJson(filename, settings);
+}
+
+void SettingsManager::updateSettings(ofJson remoteSettings){
+    settings = remoteSettings;
+    ofLogVerbose("SettingsManager::updateSettings") << "Settings updated" << endl;
+}
 //public destructor
 SettingsManager::~SettingsManager() {
 	// Destructor code

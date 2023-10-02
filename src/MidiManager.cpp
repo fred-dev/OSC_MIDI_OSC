@@ -17,9 +17,9 @@ void MidiManager::setup(){
 
 	// Access the settings
 	midiManagerSettings = settingsManager.getSettings();
-    //print out all availale midi ports 
-    midiOut.listOutPorts();
-    midiIn.listInPorts();
+
+    midiManagerSettings["allOutPorts"] = midiOut.getOutPortList();
+    midiManagerSettings["allInPorts"] = midiIn.getInPortList();
 
 	if (midiManagerSettings["useVirtualPort"]) {
 		midiOut.openVirtualPort("OSC_MIDI_OSC_OUT");
@@ -75,9 +75,17 @@ void MidiManager::setup(){
 			}
 		}
 	}
+    midiManagerSettings["outPortLabel"] = midiOut.getName();
+    midiManagerSettings["inPortLabel"] = midiIn.getName();
+   
+    settingsManager.saveSettings("MIDI_OSC_SETTINGS.json", midiManagerSettings);
+    
+    
 	ofLogVerbose("MidiManager") << "MidiManager constructor called, midi out port: " + midiOut.getName() + " midi in port: " + midiIn.getName() << endl;
 	midiIn.ignoreTypes(false, false, false);
 	midiIn.addListener(this);
+    
+
 }
 void MidiManager::newMidiMessage(ofxMidiMessage& msg) {
     
@@ -195,6 +203,7 @@ void MidiManager::newMidiMessage(ofxMidiMessage& msg) {
     }
     oscSend.sendMessage(m);
     ofLogVerbose("MidiManager::newMidiMessage'") << message << endl;
+    ofSendMessage(message);
 }
 
 std::string MidiManager::getMidiShowControTargetType(uint8_t byte) {

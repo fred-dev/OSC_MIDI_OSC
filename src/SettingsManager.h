@@ -24,6 +24,9 @@ public:
     // Delete copy constructor and assignment operator
     SettingsManager(SettingsManager const&) = delete;
     void operator=(SettingsManager const&) = delete;
+    
+    void saveSettings(const std::string& filename, ofJson remoteSettings);
+    void updateSettings(ofJson remoteSettings);
 
 private:
     SettingsManager(); // Private constructor
