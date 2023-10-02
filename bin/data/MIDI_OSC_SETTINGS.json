@@ -1,29 +1,14 @@
 {
     "Log_level": 0,
-    "frameRate": 30,
+    "frameRate": 25,
     "incomingPortOsc": 12345,
-    "midOutDevice": "Euphonix MIDI Euphonix Port 4",
-    "midiInChannel": 1,
-    "midiInDevice": "Isadora Virtual Out",
-    "midiInPorts": [
-        "IAC Driver Bus 1",
-        "Euphonix MIDI Euphonix Port 1",
-        "Euphonix MIDI Euphonix Port 2",
-        "Euphonix MIDI Euphonix Port 3",
-        "Euphonix MIDI Euphonix Port 4",
-        "Isadora Virtual Out"
-    ],
-    "midiOutChannel": 1,
-    "midiOutDevice": null,
-    "midiOutPorts": [
-        "IAC Driver Bus 1",
-        "Euphonix MIDI Euphonix Port 1",
-        "Euphonix MIDI Euphonix Port 2",
-        "Euphonix MIDI Euphonix Port 3",
-        "Euphonix MIDI Euphonix Port 4",
-        "Isadora Virtual In"
-    ],
     "outGoingPortOsc": 1234,
     "outgoingIpOSC": "127.0.0.1",
-    "useVirtualPort": false
+    "useVirtualPort": false,
+    "midiOuDeviceByString": false,
+    "midiOutDevice": 9,
+    "midiOutChannel": 1,
+    "midiInDeviceByString": false,
+    "midiInChannel": 1,
+    "midiInDevice": 8
 }

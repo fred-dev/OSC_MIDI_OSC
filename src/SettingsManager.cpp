@@ -155,3 +155,8 @@ void SettingsManager::setDefaultSettings() {
     settings["frameRate"] = 25;
     ofLogVerbose("SettingsManager::setDefaultSettings") << "frameRate set to " << settings["frameRate"] << endl;
 }
+
+//public destructor
+SettingsManager::~SettingsManager() {
+	// Destructor code
+}

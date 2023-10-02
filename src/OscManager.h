@@ -30,9 +30,9 @@ public:
     ofxOscReceiver& getOscReciever() { return oscReceiver; }
     
     void handleIncomingMessages();
-    // Public methods to send and receive OSC messages
-    void sendOscMessage(/* parameters */);
-    // ... other public methods ...
+  
+    //public destructor
+	~OscManager();
 
 private:
     OscManager(); // Constructor is private now

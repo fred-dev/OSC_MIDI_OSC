@@ -34,6 +34,9 @@ public:
     vector<unsigned char> sysexMMCMsg;
     vector<unsigned char> buildMMCMessaage(int deviceID, const std::string& command);
 
+    //public destructor
+	~MidiManager();
+
 
 
 private:

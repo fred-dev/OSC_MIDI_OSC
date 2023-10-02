@@ -8,34 +8,76 @@
 #include "MidiManager.h"
 
 MidiManager::MidiManager() {
-    // Get the instance of SettingsManager
-    SettingsManager& settingsManager = SettingsManager::getInstance();
-
-    // Access the settings
-    midiManagerSettings = settingsManager.getSettings();
-
-    if (midiManagerSettings["useVirtualPort"]) {
-        midiOut.openVirtualPort("OSC_MIDI_OSC_OUT");
-        midiIn.openVirtualPort("OSC_MIDI_OSC_IN");
-    } else {
-        if (midiManagerSettings["midiOutDevice"].is_string()) {
-            midiOut.openPort(string(midiManagerSettings["midiOutDevice"]));
-        } else if (midiManagerSettings["midiOutDevice"].is_number()) {
-            midiOut.openPort(int(midiManagerSettings["midiOutDevice"]));
-        }
-
-        if (midiManagerSettings["midiInDevice"].is_string()) {
-            midiIn.openPort(string(midiManagerSettings["midiInDevice"]));
-        } else if (midiManagerSettings["midiInDevice"].is_number()) {
-            midiIn.openPort(int(midiManagerSettings["midiInDevice"]));
-        }
-    }
-
-    midiIn.ignoreTypes(false, false, false);
-    midiIn.addListener(this);
+    
 }
 void MidiManager::setup(){
     ofLogNotice("MidiManager") << "MidiManager setup";
+	// Get the instance of SettingsManager
+	SettingsManager & settingsManager = SettingsManager::getInstance();
+
+	// Access the settings
+	midiManagerSettings = settingsManager.getSettings();
+    //print out all availale midi ports 
+    midiOut.listOutPorts();
+    midiIn.listInPorts();
+
+	if (midiManagerSettings["useVirtualPort"]) {
+		midiOut.openVirtualPort("OSC_MIDI_OSC_OUT");
+		midiIn.openVirtualPort("OSC_MIDI_OSC_IN");
+	} else {
+		if (midiManagerSettings["midiOutDevice"].is_string()) {
+
+			//Check if the port from the settings exists
+			if (midiOut.getOutPortList().size() > 0) {
+				for (int i = 0; i < midiOut.getOutPortList().size(); i++) {
+					if (midiOut.getOutPortList()[i] == midiManagerSettings["midiOutDevice"]) {
+						midiOut.openPort(string(midiManagerSettings["midiOutDevice"]));
+						break;
+					}
+					//else set the port to the first available port
+					else {
+						midiOut.openPort(0);
+					}
+				}
+			}
+
+		} else if (midiManagerSettings["midiOutDevice"].is_number()) {
+
+			//check if the port from the settings exists (is the number lower than the number of ports)
+			if (midiManagerSettings["midiOutDevice"] < midiOut.getNumOutPorts()) {
+				midiOut.openPort(int(midiManagerSettings["midiOutDevice"]));
+			} else {
+				midiOut.openPort(0);
+			}
+		}
+
+		if (midiManagerSettings["midiInDevice"].is_string()) {
+			//Check if the port from the settings exists
+			if (midiIn.getInPortList().size() > 0) {
+				for (int i = 0; i < midiIn.getInPortList().size(); i++) {
+					if (midiIn.getInPortList()[i] == midiManagerSettings["midiInDevice"]) {
+						midiIn.openPort(string(midiManagerSettings["midiInDevice"]));
+						break;
+					}
+					//else set the port to the first available port
+					else {
+						midiIn.openPort(0);
+					}
+				}
+			}
+
+		} else if (midiManagerSettings["midiInDevice"].is_number()) {
+			//check if the port from the settings exists (is the number lower than the number of ports)
+			if (midiManagerSettings["midiInDevice"] < midiIn.getNumInPorts()) {
+				midiIn.openPort(int(midiManagerSettings["midiInDevice"]));
+			} else {
+				midiIn.openPort(0);
+			}
+		}
+	}
+	ofLogVerbose("MidiManager") << "MidiManager constructor called, midi out port: " + midiOut.getName() + " midi in port: " + midiIn.getName() << endl;
+	midiIn.ignoreTypes(false, false, false);
+	midiIn.addListener(this);
 }
 void MidiManager::newMidiMessage(ofxMidiMessage& msg) {
     
@@ -159,11 +201,8 @@ std::string MidiManager::getMidiShowControTargetType(uint8_t byte) {
     auto it = MIDI_SHOW_CONTROL_TARGET_TYPE.find(byte);
 
     if (it != MIDI_SHOW_CONTROL_TARGET_TYPE.end()) {
-        //ofLogVerbose() << "Midi Show Control Target " << it->second << std::endl;
         return it->second;
     } else {
-        // Handle the case where the byte is not found in the map
-        //ofLogVerbose() << "Midi Show Control Target Unknown" << std::endl;
         return "unknown";
     }
 }
@@ -241,4 +280,12 @@ vector<unsigned char> MidiManager::buildMMCMessaage(int deviceID, const std::str
      sysexMMCMsg.push_back(MIDI_SYSEX_END);
     
     return sysexMMCMsg;
+}
+
+//destructors
+MidiManager::~MidiManager() {
+    midiIn.closePort();
+    midiIn.removeListener(this);
+    midiOut.closePort();
+	ofLogVerbose("MidiManager") << "Destructor called" << endl;
 }

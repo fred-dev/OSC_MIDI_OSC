@@ -8,18 +8,19 @@
 #include "OscManager.h"
 
 OscManager::OscManager() {
-    SettingsManager& settingsManager = SettingsManager::getInstance();
-    // Access the settings
-    oscManagerSettings = settingsManager.getSettings();
 
-    oscSender.setup(oscManagerSettings["outgoingIpOSC"], oscManagerSettings["outGoingPortOsc"]);
-    ofLogVerbose() << "OSC Sender initialised and set to port: " << oscSender.getPort() << " With host: " << oscSender.getHost() << endl;
-    oscReceiver.setup(oscManagerSettings["incomingPortOsc"]);
-    ofLogVerbose() << "OSC Receiver initialised and set to port: " << oscReceiver.getPort() << endl;
 }
 
 void OscManager::setup() {
     ofLogVerbose() << "OSC Manager setup" << endl;
+	SettingsManager & settingsManager = SettingsManager::getInstance();
+	// Access the settings
+	oscManagerSettings = settingsManager.getSettings();
+
+	oscSender.setup(oscManagerSettings["outgoingIpOSC"], oscManagerSettings["outGoingPortOsc"]);
+	ofLogVerbose() << "OSC Sender initialised and set to port: " << oscSender.getPort() << " With host: " << oscSender.getHost() << endl;
+	oscReceiver.setup(oscManagerSettings["incomingPortOsc"]);
+	ofLogVerbose() << "OSC Receiver initialised and set to port: " << oscReceiver.getPort() << endl;
 }
 
 void OscManager::handleIncomingMessages() {
@@ -90,4 +91,13 @@ void OscManager::handleIncomingMessages() {
         }
         
     }
+}
+
+//destructor
+OscManager::~OscManager() {
+    oscSender.clear();
+ 
+
+
+	ofLogVerbose() << "OSC Manager destructor called" << endl;
 }

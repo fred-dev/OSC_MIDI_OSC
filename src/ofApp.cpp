@@ -2,11 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-   settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");    
+	ofSetLogLevel(OF_LOG_VERBOSE);
+    settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");    
     midiManager.setup();
     oscManager.setup();
     ofBackground(255);
-    ofSetLogLevel(OF_LOG_VERBOSE);
+    
 }
 
 //--------------------------------------------------------------
