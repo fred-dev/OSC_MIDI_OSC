@@ -9,26 +9,30 @@
 
 #include <stdio.h>
 
-#include "Mode.h"
+#include "modes/Mode.h"
+#include "ofxTextInputField.h" 
 
 class OscInSetupMode : public Mode {
 private:
-    // Member variables specific to MidiInMode
-    std::string title;
-    std::vector<std::string> ports;
-    std::string currentPort;
-    int channel;
+		std::string title;
 
-public:
-    OscInSetupMode();
-    ~OscInSetupMode();
+	public:
+		OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
+		~OscInSetupMode();
 
-    void setup() override;
-    void draw() override;
-    void update() override;
-    void exit() override;
-    void keyPressed(int key) override;
-};
+		void setup() ;
+		void draw() ;
+		void update() ;
+		void exit() ;
+		void keyPressed(int key) ;
+		simpleButton saveMidiInPortSettings;
+		simpleButton saveMidiInChannelSettings;
 
+		ofxTextInputField oscInPortField;
 
+		void onOSCInputPortEditied(string & message);
 
+		simpleButton saveOSCInPortSettings;
+		simpleButton GoToConversionMode;
+		
+	};

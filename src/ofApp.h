@@ -6,6 +6,14 @@
 #include "OscManager.h"
 #include "ofxTextInputField.h"
 #include "simpleButton.h"
+#include "Mode.h"
+#include "modes/ModeManager.h"
+#include "modes/MidiInSetupMode.h"
+#include "modes/MidiOutSetupMode.h"
+#include "modes/OscInSetupMode.h"
+#include "modes/OscOutSetupMode.h"
+#include "modes/ConversionMode.h"
+
 
 
 enum OperationMode {
@@ -48,7 +56,6 @@ class ofApp : public ofBaseApp {
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
 		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
         SettingsManager& settingsManager = SettingsManager::getInstance();
@@ -58,84 +65,25 @@ class ofApp : public ofBaseApp {
         
         std::string activityMessage;
     
-    int operationMode = MODE_SETTING_MIDI_IN;
     
     std::vector<std::string> midiInPortList;
     std::vector<std::string> midiOutPortList;
     int selectedInPort, selectedOutPort;
 
-    // Helper function to handle port selection
-    void selectPort(ofJson& ports, ofJson& currentPort, int direction);
-
-    // Helper function to handle channel selection
-    void selectChannel(ofJson& channel, int direction);
-    
-    void drawMidiSettings(const std::string& title, const ofJson& ports, const ofJson& currentPort, int channel);
-    
-    bool isValidIPAddress(std::string ip);
-    
-    ofxTextInputField oscInPortField, oscOutPortField, oscOutIPField;
-    void setupTextInputFields();
-    
-    void disableAllTextInputFields();
-    
-    void onOSCInputPortEditied(string& message);
-    void onOSCOutputPortEditied(string& message);
-    void onOSCOutputIPEditied(string& message);
-    
     ofTrueTypeFont font;
-    
-    void setupMidPortOutSetupMode();
-    void drawMidiPortOutSetupMode();
-    void updateMidiPortOutSetupMode();
-    void exitMidiPortOutSetupMode();
-    
-    simpleButton goToMidiOutSetMode;
-    simpleButton goToMidiInSetMode;
-    simpleButton gotToOSCOutSetMode;
-    simpleButton goToOSCInSetMode;
-    simpleButton GoToConversionMode;
-  
-    simpleButton saveMidiOutPortSettings;
-    simpleButton saveMidiOutChannelSettings;
-    simpleButton saveMidiInPortSettings;
-    simpleButton saveMidiInChannelSettings;
-    
-    
-    simpleButton saveOSCOutPortSettings;
-    simpleButton saveOSCOutIptSettings;
-    simpleButton saveOSCInPortSettings;
-    
-    void setupAllButtons();
-    void disableAllButtons();
-    void disableGlobalButtons();
-    void enableGlobalButtons();
-    
-    void setupMidPortInSetupMode();
-    void drawMidiPortInSetupMode();
-    void updateMidiPortInSetupMode();
-    void exitMidiPortInSetupMode();
-    
-    
-    void setupOSCInSetupMode();
-    void drawOSCInSetupMode();
-    void updateOSCInSetupMode();
-    void exitOSCInSetupMode();
-    
-    void setupOSCOutSetupMode();
-    void drawOSCOutSetupMode();
-    void updateOSCOutSetupMode();
-    void exitOSCOutSetupMode();
-    
-    void setupConversionMode();
-    void drawConversionMode();
-    void updateConversionMode();
-    void exitConversionMode();
-    
-    void exitAllModes();
-    void goToMode(int mode);
-    
+    // Helper function to handle port selection
 
+    ModeManager modeManager; // If you have a separate class for ModeManager
+
+	std::unique_ptr<Mode> midiInSetupMode;
+	std::unique_ptr<Mode> midiOutSetupMode;
+	std::unique_ptr<Mode> oscInSetupMode;
+	std::unique_ptr<Mode> oscOutSetupMode;
+	std::unique_ptr<Mode> conversionMode;
+
+
+
+    
     std::unordered_map<std::string, int> buttonMessagesMap = {
         {"BTN_MSG_MIDI_IN_PORT_SET", 0},
         {"BTN_MSG_MIDI_IN_CHANNEL_SET", 1},
@@ -150,6 +98,7 @@ class ofApp : public ofBaseApp {
         {"BTN_MSG_GOTOMODE_MODE_SETTING_OSC_OUT", 10},
         {"BTN_MSG_GOTOMODE_MODE_CONVERSION", 11}
     };
-
+	
+  
 };
 

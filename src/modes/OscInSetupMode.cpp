@@ -7,19 +7,41 @@
 
 #include "OscInSetupMode.h"
 
+OscInSetupMode::OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
+	: Mode(fontRef, settingsRef) { 
+    oscInPortField.setup();
+	oscInPortField.text = ofToString(settings["incomingPortOsc"]);
+	oscInPortField.bounds.x = 10;
+	oscInPortField.bounds.y = 30;
+	oscInPortField.bounds.height = 15;
+	oscInPortField.bounds.width = 188;
+	oscInPortField.setFont(font);
 
-OscInSetupMode::OscInSetupMode() : title("Midi in settings") {
-    // Initialization
+	ofAddListener(oscInPortField.onTextChange, this, &OscInSetupMode::onOSCInputPortEditied);
+
+	saveOSCInPortSettings.setup("Save OSC in port settings", "BTN_MSG_OSC_IN_PORT_SET");
+	saveOSCInPortSettings.set(200, 200, 200, 20);
+	saveOSCInPortSettings.disableAllEvents();
+
+	GoToConversionMode.setup("Conversion mode", "BTN_MSG_GOTOMODE_MODE_CONVERSION");
+	GoToConversionMode.set(200, 200, 200, 20);
+	GoToConversionMode.disableAllEvents();
 }
 
 OscInSetupMode::~OscInSetupMode() {}
 
 void OscInSetupMode::setup() {
-    // Implementation
+	oscInPortField.enable();
+	saveOSCInPortSettings.enableAllEvents();
+	GoToConversionMode.enableAllEvents();
 }
 
 void OscInSetupMode::draw() {
-    // Implementation
+	font.drawString("OSC in settings", 10, 15);
+	ofSetColor(0);
+	ofRectangle(oscInPortField.bounds);
+	ofNoFill();
+	oscInPortField.draw();
 }
 
 void OscInSetupMode::update() {
@@ -27,9 +49,15 @@ void OscInSetupMode::update() {
 }
 
 void OscInSetupMode::exit() {
-    // Implementation
+	oscInPortField.disable();
+	saveOSCInPortSettings.disableAllEvents();
+	GoToConversionMode.disableAllEvents();
 }
 
 void OscInSetupMode::keyPressed(int key) {
     // Implementation
+}
+
+void OscInSetupMode::onOSCInputPortEditied(string & message) {
+	ofLogNotice() << "onOSCInputPortEditied: " << message;
 }

@@ -1,4 +1,4 @@
-ofxMSAInteractiveObject
 ofxMidi
+ofxMSAInteractiveObject
 ofxOsc
 ofxTextInputField

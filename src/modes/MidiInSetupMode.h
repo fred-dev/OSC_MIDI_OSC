@@ -8,26 +8,26 @@
 
 
 #include <stdio.h>
-
-#include "Mode.h"
+#include "modes/Mode.h"
 
 class MidiInSetupMode : public Mode {
 private:
-    // Member variables specific to MidiInMode
-    std::string title;
-    std::vector<std::string> ports;
-    std::string currentPort;
-    int channel;
+	std::string title;
+
 
 public:
-    MidiInSetupMode();
-    ~MidiInSetupMode();
+	MidiInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
+	~MidiInSetupMode();
 
-    void setup() override;
-    void draw() override;
-    void update() override;
-    void exit() override;
-    void keyPressed(int key) override;
+    void setup() ;
+    void draw() ;
+    void update() ;
+    void exit() ;
+    void keyPressed(int key) ;
+	simpleButton saveMidiInPortSettings;
+	simpleButton saveMidiInChannelSettings;
+	void selectPort(ofJson & ports, ofJson & currentPort, int direction);
+	void selectChannel(ofJson & channel, int direction);
 };
 
 

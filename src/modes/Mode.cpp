@@ -6,3 +6,12 @@
 //
 
 #include "Mode.h"
+
+Mode::Mode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
+	: font(fontRef)
+	, settings(settingsRef) { 
+}
+
+Mode::~Mode() {
+
+}
