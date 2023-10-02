@@ -23,7 +23,13 @@ public:
     OscManager(OscManager&&) = delete;
     void operator=(OscManager const&) = delete;
     void operator=(OscManager&&) = delete;
-
+    
+    void setup();
+    
+    ofxOscSender& getOSCSender() { return oscSender; }
+    ofxOscReceiver& getOscReciever() { return oscReceiver; }
+    
+    void handleIncomingMessages();
     // Public methods to send and receive OSC messages
     void sendOscMessage(/* parameters */);
     // ... other public methods ...
@@ -31,8 +37,8 @@ public:
 private:
     OscManager(); // Constructor is private now
 
-    void handleIncomingMessages();
-
+    ofJson oscManagerSettings;
+    string message;
     ofxOscSender oscSender;
     ofxOscReceiver oscReceiver;
 };

@@ -99,4 +99,20 @@ const std::unordered_map<uint8_t, std::string> MIDI_SHOW_CONTROL_COMMAND_TYPE = 
     {0x1D, "OPEN_CUE_PATH"}
 };
 
+const std::unordered_map<uint8_t, std::string> MIDI_MACHINE_CONTROL_COMMAND_TYPE = {
+    {0x01, "STOP"},
+    {0x02, "PLAY"},
+    {0x03, "DEFERRED_PLAY"},
+    {0x04, "FAST_FORWARD"},
+    {0x05, "REWIND"},
+    {0x06, "RECORD_STROBE"},
+    {0x07, "RECORD_EXIT"},
+    {0x08, "RECORD_PAUSE"},
+    {0x09, "PAUSE"},
+    {0x0A, "EJECT"},
+    {0x0B, "CHASE"},
+    {0x0C, "COMMAND_ERROR_RESET"},
+    {0x0D, "MMC_RESET"}
+};
+    
 #endif /* MSCConstants_h */

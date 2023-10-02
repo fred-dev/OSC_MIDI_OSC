@@ -1,14 +1,13 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxOsc.h"
-#include "ofxMidi.h"
-#include "ofxGui.h"
-#include "ofxDropdown.h"
+#include "SettingsManager.h"
+#include "MidiManager.h"
+#include "OscManager.h"
 
-class ofApp : public ofBaseApp, public ofxMidiListener {
+class ofApp : public ofBaseApp {
 
-	public:
+    public:
 		void setup();
 		void update();
 		void draw();
@@ -23,27 +22,10 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    
-    
-    ofxOscReceiver receiver;
-    ofxMidiOut midiOut;
-	string message;
-    void newMidiMessage(ofxMidiMessage& eventArgs);
-    stringstream text;
-    
-    ofxMidiIn midiIn;
-    ofxMidiMessage midiMessage;
-    ofxOscSender oscSend;
+        SettingsManager& settingsManager = SettingsManager::getInstance();
+        MidiManager& midiManager = MidiManager::getInstance();
+        OscManager& oscManager = OscManager::getInstance();
 
 
-
-
-    ofxPanel gui;
-  
-    ofxDropdown_<string> midiInputDropdown {"Midi_inputs"};
-    ofxDropdown_<string> midiOutputDropdown {"Midi_outputs"};
-
-    void changeMidiInput(string & input);
-    void changeMidiOutput(string & ouput);
 		
 };

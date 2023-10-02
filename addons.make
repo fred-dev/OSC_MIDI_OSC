@@ -1,4 +1,2 @@
-ofxDropdown
-ofxGui
 ofxMidi
 ofxOsc
