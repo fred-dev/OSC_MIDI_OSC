@@ -308,7 +308,7 @@ std::vector<unsigned char> MidiManager::buildMidiShowControlMessage(int deviceID
 
     sysexMSCMsg.push_back(MIDI_SYSEX);
     sysexMSCMsg.push_back(0x7F); // Real Time Universal SysEx ID
-    sysexMSCMsg.push_back(deviceID & 0x7F); // Device ID (limited to 7 bits)
+    sysexMSCMsg.push_back(deviceID); // Device ID (limited to 7 bits)
     sysexMSCMsg.push_back(0x02); // Midi Show Control Command
 
     // Find the target type byte from the map
@@ -326,13 +326,16 @@ std::vector<unsigned char> MidiManager::buildMidiShowControlMessage(int deviceID
             break;
         }
     }
-
+    
+    
     // Add command data bytes with 0x00 separator
     for (int dataByte : commandData) {
+        sysexMSCMsg.push_back('0' + dataByte); // Convert to ASCII representation
         sysexMSCMsg.push_back(0x00); // Separator
-        sysexMSCMsg.push_back(dataByte & 0x7F); // Ensure the data byte is limited to 7 bits
     }
-
+    //remove the last separator
+    sysexMSCMsg.pop_back();
+    
     sysexMSCMsg.push_back(MIDI_SYSEX_END);
 
     return sysexMSCMsg;

@@ -111,13 +111,32 @@ void OscManager::handleIncomingMessages() {
             message = "Sending MMC Command: " + command + " DeviceID: " + ofToString(deviceId);
         }
         if(m.getAddress() == "/MidiShowControl"){
-            int deviceId = m.getArgAsInt32(0);
-            std::string command = m.getArgAsString(1);
-            std::string commandFormat = m.getArgAsString(2);
-            std::vector<int> commandData;
-            for(int i = 3; i < m.getNumArgs(); i++){  
-                commandData.push_back(m.getArgAsInt(i));
+            
+            //iterate through the arguments
+            //first int argument is device id
+            //first string argument is command
+            //second string argument is command format
+            //remaining int arguments are command data
+            std::vector<int> integerPositions;
+            std::vector<int> stringPositions;
+            for (int i = 0; i <m.getNumArgs(); i++) {
+                if(m.getArgType(i) != OFXOSC_TYPE_STRING){
+                    integerPositions.push_back(i);
+                }
+                
+                if(m.getArgType(i) == OFXOSC_TYPE_STRING){
+                    stringPositions.push_back(i);
+                }
             }
+            int deviceId = m.getArgAsInt32(integerPositions[0]);
+            std::string command = m.getArgAsString(stringPositions[0]);
+            std::string commandFormat = m.getArgAsString(stringPositions[1]);
+            std::vector<int> commandData;
+            for (int i = 2; i < integerPositions.size(); i++) {
+                commandData.push_back(m.getArgAsInt32(integerPositions[i]));
+            }
+            
+            
             std::vector<unsigned char> midiBytes = midiManager.buildMidiShowControlMessage(deviceId, command, commandFormat, commandData);
             midiOut.sendMidiBytes(midiBytes);
             message = "Sending MSC Command: " + command + " DeviceID: " + ofToString(deviceId);
