@@ -8,9 +8,9 @@
 #pragma once
 #include "ofxMSAInteractiveObject.h"
 
-#define IDLE_COLOR 0x000000
-#define OVER_COLOR 0xDA1884
-#define DOWN_COLOR 0x6A1CB0
+#define IDLE_COLOR 0x2860bd
+#define OVER_COLOR 0xbd5928
+#define DOWN_COLOR 0xbd5928
 
 class simpleButton : public ofxMSAInteractiveObject {
 public:

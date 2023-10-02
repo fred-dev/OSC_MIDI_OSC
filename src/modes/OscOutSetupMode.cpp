@@ -52,15 +52,17 @@ void OscOutSetupMode::setup() {
 }
 
 void OscOutSetupMode::draw() {
-	font.drawString("OSC out settings", 10, 15);
-    
-	ofSetColor(0);
-    ofNoFill();
+	ofSetColor(40,96,189);
+    font.drawString("OSC out settings", 10, 15);
+    ofPushStyle();
+    ofFill();
+    ofSetColor(255,216,139);
     ofDrawRectRounded(oscOutPortField.bounds.x, oscOutPortField.bounds.y + 8, oscOutPortField.bounds.width, oscOutPortField.bounds.height, 3);
-	oscOutPortField.draw();
-    
     ofDrawRectRounded(oscOutIPField.bounds.x, oscOutIPField.bounds.y + 8, oscOutIPField.bounds.width, oscOutIPField.bounds.height, 3);
-	oscOutIPField.draw();
+    ofPopStyle();
+    oscOutIPField.draw();
+    oscOutPortField.draw();
+	
 }
 
 void OscOutSetupMode::update() {

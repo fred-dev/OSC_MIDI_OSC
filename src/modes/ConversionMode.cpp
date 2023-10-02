@@ -43,7 +43,7 @@ void ConversionMode::setup() {
 }
 
 void ConversionMode::draw() {
-	ofSetColor(0);
+	ofSetColor(40,96,189);
     font.drawString("Conversion active", 10, 15);
     font.drawString(activityMessage, 10, 35);
 	font.drawString("Midi input on port " + settings["inPortLabel"].get<string>() + "  Channel: " + ofToString(settings["midiInChannel"]), 10, 55);

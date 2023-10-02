@@ -9,3 +9,7 @@
 !/bin/data/MIDI_OSC_SETTINGS.json
 !/bin/data/Gaultier-Regular.ttf
 .DS_Store
+!/Icon/midi-osc-midi.png
+!/Icon/midi-osc-midi.ico
+!/Icon/midi-osc-midi.icns
+midi-osc-midi.png

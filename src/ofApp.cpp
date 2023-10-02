@@ -29,6 +29,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    ofSetBackgroundColor(255,216,139);
     modeManager.draw();
 }
 

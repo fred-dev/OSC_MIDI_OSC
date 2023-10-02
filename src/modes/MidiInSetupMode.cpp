@@ -34,6 +34,8 @@ void MidiInSetupMode::setup() {
 }
 
 void MidiInSetupMode::draw() {
+    ofSetColor(40,96,189);
+
 	font.drawString(title, 10, 15);
     font.drawString("Use the up & down keys to set the port and the < and > to set the channel", 10, 35);
 
@@ -42,9 +44,9 @@ void MidiInSetupMode::draw() {
 		ofPushStyle();
 
 		if (settings["allInPorts"][i] == settings["inPortLabel"]) {
-			ofSetColor(255, 0, 0);
+            ofSetColor(189,89,40);
 		} else {
-			ofSetColor(0);
+            ofSetColor(40,96,189);
 		}
 
 		font.drawString(settings["allInPorts"][i], 10, 55 + (i * 20));
@@ -52,7 +54,7 @@ void MidiInSetupMode::draw() {
 	}
 
 	// Draw the midi channel to the right of these messages
-	ofSetColor(0);
+    ofSetColor(40,96,189);
 	font.drawString("Midi channel set to: " + ofToString(settings["midiInChannel"]), 320, 55);
 }
 

@@ -38,10 +38,12 @@ void OscInSetupMode::setup() {
 }
 
 void OscInSetupMode::draw() {
+    ofSetColor(40,96,189);
 	font.drawString("OSC in settings", 10, 15);
-	ofSetColor(0);
-    ofNoFill();
+    ofPushStyle();
+    ofFill();
     ofDrawRectRounded(oscInPortField.bounds.x, oscInPortField.bounds.y + 8, oscInPortField.bounds.width, oscInPortField.bounds.height, 3);
+    ofPopStyle();
 	oscInPortField.draw();
 }
 
