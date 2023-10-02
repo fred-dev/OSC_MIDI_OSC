@@ -1,63 +1,59 @@
 # OSC_MIDI_OSC
 
-A simple cross platform OSC to Midi and Midi to OSC convertor made with Made with openframeworks (https://github.com/openframeworks/openFrameworks)  
-using ofxMidi (https://github.com/danomatika/ofxMidi)
+A simple cross-platform OSC to Midi and Midi to OSC converter. 
 
-MAC OS 10.15+ (ish) 64 bit release available on the release tab.
+- **Made with**: [openframeworks](https://github.com/openframeworks/openFrameworks)
+- **Using**: [ofxMidi](https://github.com/danomatika/ofxMidi)
 
-Windows 10+ 64 bit releases available on the release tab.
+## Downloads
 
-Linux has many requirements, see below, if you are looking for a fast and light solution for Linux this may not be for you, the openframeworks dependencies are kind of heavy as it 
-supports a lot of interesting tools.
+- **MAC OS 10.15+ (ish) 64 bit**: Available on the release tab.
+- **Windows 10+ 64 bit**: Available on the release tab.
 
-To compile and work with this code download openframeworks (for a fast setup go for a release from https://openframeworks.cc/download/)
-Follow the instructions for setting up openframeworks on your platform.
+> **Note**: Linux has many requirements. If you're looking for a fast and light solution for Linux, this may not be for you due to the heavy dependencies of openframeworks.
 
-Navigate to openframeworksRoot/myApps/ and clone this repository.
+## Setup
 
-Navigate to openframeworksRoot/addons/ and clone the ofxMidi repository (https://github.com/danomatika/ofxMidi)
+1. Download [openframeworks](https://openframeworks.cc/download/) and set it up for your platform.
+2. Navigate to `openframeworksRoot/myApps/` and clone this repository.
+3. Navigate to `openframeworksRoot/addons/` and clone the following repositories:
+   - [ofxMidi](https://github.com/danomatika/ofxMidi)
+   - [ofxTextInputField](https://github.com/Flightphase/ofxTextInputField)
+   - [ofxMSAInteractiveObject](https://github.com/memo/ofxMSAInteractiveObject)
+4. Use the project generator for your platform to generate a project.
+5. Compile for your platform.
 
-Navigate to openframeworksRoot/addons/ and clone the ofxTextInputField repository (https://github.com/Flightphase/ofxTextInputField)
+## Configuration
 
-Navigate to openframeworksRoot/addons/ and clone the ofxMSAInteractiveObject repository (https://github.com/memo/ofxMSAInteractiveObject)
+To configure the app, go to the `data` folder and edit the `MIDI_OSC_SETTINGS.json` file, or change the settings from the GUI! You can set the incoming and outgoing midi and OSC ports and the destination IP.
 
-Use the project generator for your platform to generate a project to work with.
+## Updates
 
-Compile for your platform and make the improvements I never got around too, like finishing midi show control and timecode.
+- Now includes Midi Machine control.
+- Basic interactive GUI for on-the-go settings adjustments.
+- Midi Show Control is now included (beta version).
 
-To configure the app go to the data folder and edit the MIDI_OSC_SETTINGS.json file, or change the settings from the GUI!
+## Windows Users
 
-You can set the incoming and outgoing midi and OSC ports and the destination IP.
+To use this with Windows, ensure you install a virtual midi port. We recommend [Loopmidi from Tobias Erichsen](http://www.tobias-erichsen.de/software/loopmidi.html).
 
-The OSC format is the same for sending and receiving. 
+## To-Do
 
-address "/cc" is for controller values with two int arguments the first is the controller number and the second is the value. 
-The receives OSC in this format and sends the according midi signal. Incoming midi cc will trigger an OSC message in the same format
+- More detailed MSC and MTC.
 
-address "/noteOn" is for note on messages with two int arguments - note value and velocity. The software receives OSC messages in this format 
-and will automatically send OSC messages in this format when a midi note on is received.
+## OSC Format
 
-address "/noteOff" is for note off messages with one int argument - note value. The software receives OSC messages in this format 
-and will automatically send OSC messages in this format when a midi note off is received.
+The OSC format is consistent for both sending and receiving. Here are the detailed descriptions of the address formats:
 
-address "/Aftertouch" is for mono aftertouch off messages with one int argument - value. The software receives OSC messages in this format 
-and will automatically send OSC messages in this format when a midi aftertouch message is received.
+- **/cc**: For controller values with two int arguments: the controller number and the value. 
+- **/noteOn**: For note on messages with two int arguments: note value and velocity.
+- **/noteOff**: For note off messages with one int argument: note value.
+- **/Aftertouch**: For mono aftertouch off messages with one int argument: value.
+- **/PolyAftertouch**: For polyphonic aftertouch messages with two int arguments: pitch and value.
+- **/Pitchbend**: For pitch bend messages with one int argument: value.
+- **/ProgramChange**: For program change messages with one int argument: program value.
 
-address "/PolyAftertouch" is for polyphonic aftertouch messages with two int arguments - pitch and value. The software receives OSC messages in this format 
-and will automatically send OSC messages in this format when a midi poly aftertouch message is received.
-
-address "/Pitchbend" is for pitch bend messages with one int argument -  value. The software receives OSC messages in this format 
-and will automatically send OSC messages in this format when a midi pitch bend is received.
-
-address "/ProgramChange" is for program change messages with one int argument - program value. The software receives OSC messages in this format 
-and will automatically send OSC messages in this format when a midi program change is received.
-
-This application was made as a helper for people using software that does not support OSC natively but want to interact with OSC enabled
-software. It was developed as part of Crosstalk Body and Technology Laboratory in Tehran in 2015 by Frederick Rodrigues.
-
-
-## UPDATE
-Now includes Midi Machine control
+The software receives OSC messages in these formats and will automatically send the corresponding MIDI signals. Incoming MIDI signals will trigger OSC messages in the same formats.
 
 The app wll output MMC commands from the following OSC inputs, add an int argument for the device ID and a string argument for the command
 
@@ -76,11 +72,7 @@ Address: "/MMCCommand"
 - **COMMAND_ERROR_RESET**
 - **MMC_RESET**
 
-
-The app will also output these commands over OSC when receiving the relevant MMC commands in the midi input port
-
-## UPDATE
-Midi Show Control is now included, but in a betish kind of way.
+  
 The app wll output Midi Show Control commands from the following OSC inputs, add an int argument for the device ID, a string argument 
 for the command target and another string argument for the command type, lastly add extra integer arguments for the command payload (up to 3)
 
@@ -169,12 +161,3 @@ for the command target and another string argument for the command type, lastly 
 - **OPEN_CUE_LIST**
 - **CLOSE_CUE_LIST**
 - **OPEN_CUE_PATH**
-
-
-
-To use this with windows make sure you install some kind of virtual midi port- we used Loopmidi from Tobias Erichsen you can download it here:
-
-http://www.tobias-erichsen.de/software/loopmidi.html
-
-TO DO 
-More detailed MSC and MTC
