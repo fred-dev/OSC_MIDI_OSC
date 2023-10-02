@@ -265,7 +265,6 @@ std::vector<int> MidiManager::getMidiShowControlCommandData(ofxMidiMessage midiM
         }
     }
 
-    // Handle the last number if the string is not empty
     if (!numberStr.empty()) {
         commandData.push_back(std::stoi(numberStr));
     }
@@ -278,11 +277,8 @@ std::string MidiManager::getMidiMachineControlCommand(uint8_t byte) {
     auto it = MIDI_MACHINE_CONTROL_COMMAND_TYPE.find(byte);
 
     if (it != MIDI_MACHINE_CONTROL_COMMAND_TYPE.end()) {
-        //ofLogVerbose() << "Midi Show Control Command " << it->second << std::endl;
         return it->second;
     } else {
-        // Handle the case where the byte is not found in the map
-        //ofLogVerbose() << "Midi Show Control Command Unknown" << std::endl;
         return "unknown";
     }
 }
@@ -307,10 +303,49 @@ vector<unsigned char> MidiManager::buildMMCMessaage(int deviceID, const std::str
     return sysexMMCMsg;
 }
 
+std::vector<unsigned char> MidiManager::buildMidiShowControlMessage(int deviceID, const std::string& targetType, const std::string& commandType, const std::vector<int>& commandData) {
+    std::vector<unsigned char> sysexMSCMsg;
+
+    sysexMSCMsg.push_back(MIDI_SYSEX);
+    sysexMSCMsg.push_back(0x7F); // Real Time Universal SysEx ID
+    sysexMSCMsg.push_back(deviceID & 0x7F); // Device ID (limited to 7 bits)
+    sysexMSCMsg.push_back(0x02); // Midi Show Control Command
+
+    // Find the target type byte from the map
+    for (const auto& pair : MIDI_SHOW_CONTROL_TARGET_TYPE) {
+        if (pair.second == targetType) {
+            sysexMSCMsg.push_back(pair.first);
+            break;
+        }
+    }
+
+    // Find the command type byte from the map
+    for (const auto& pair : MIDI_SHOW_CONTROL_COMMAND_TYPE) {
+        if (pair.second == commandType) {
+            sysexMSCMsg.push_back(pair.first);
+            break;
+        }
+    }
+
+    // Add command data bytes with 0x00 separator
+    for (int dataByte : commandData) {
+        sysexMSCMsg.push_back(0x00); // Separator
+        sysexMSCMsg.push_back(dataByte & 0x7F); // Ensure the data byte is limited to 7 bits
+    }
+
+    sysexMSCMsg.push_back(MIDI_SYSEX_END);
+
+    return sysexMSCMsg;
+}
 //destructors
 MidiManager::~MidiManager() {
     midiIn.closePort();
     midiIn.removeListener(this);
     midiOut.closePort();
 	ofLogVerbose("MidiManager") << "Destructor called" << endl;
+}
+
+void MidiManager::updateSettings(){
+    SettingsManager & settingsManager = SettingsManager::getInstance();
+    midiManagerSettings = settingsManager.getSettings();
 }

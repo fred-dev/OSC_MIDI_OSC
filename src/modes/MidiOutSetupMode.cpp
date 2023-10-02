@@ -38,22 +38,22 @@ void MidiOutSetupMode::draw() {
     font.drawString("Use the up & down keys to set the port and the < and > to set the channel", 10, 35);
 
 	// Draw the list of ports and highlight the selected one
-	for (int i = 0; i < settings["allInPorts"].size(); i++) {
+	for (int i = 0; i < settings["allOutPorts"].size(); i++) {
 		ofPushStyle();
 
-		if (settings["allInPorts"][i] == settings["inPortLabel"]) {
+		if (settings["allOutPorts"][i] == settings["outPortLabel"]) {
 			ofSetColor(255, 0, 0);
 		} else {
 			ofSetColor(0);
 		}
 
-		font.drawString(settings["allInPorts"][i], 10, 55 + (i * 15));
+		font.drawString(settings["allOutPorts"][i], 10, 55 + (i * 15));
 		ofPopStyle();
 	}
 
 	// Draw the midi channel to the right of these messages
 	ofSetColor(0);
-	font.drawString("Midi channel set to: " + ofToString(settings["midiInChannel"]), 320, 55);
+	font.drawString("Midi channel set to: " + ofToString(settings["midiOutChannel"]), 320, 55);
 }
 
 void MidiOutSetupMode::update() {
@@ -71,19 +71,19 @@ void MidiOutSetupMode::_keyPressed(ofKeyEventArgs & e) {
 	int key = e.key;
 
 	if (key == OF_KEY_DOWN) {
-		selectPort(settings["allInPorts"], settings["inPortLabel"], 1);
+		selectPort(settings["allOutPorts"], settings["outPortLabel"], 1);
 	}
 
 	if (key == OF_KEY_UP) {
-		selectPort(settings["allInPorts"], settings["inPortLabel"], -1);
+		selectPort(settings["allOutPorts"], settings["outPortLabel"], -1);
 	}
 
 	if (key == OF_KEY_LEFT) {
-		selectChannel(settings["midiInChannel"], -1);
+		selectChannel(settings["midiOutChannel"], -1);
 	}
 
 	if (key == OF_KEY_RIGHT) {
-		selectChannel(settings["midiInChannel"], 1);
+		selectChannel(settings["midiOutChannel"], 1);
 	}
 }
 

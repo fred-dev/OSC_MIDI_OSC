@@ -1,5 +1,5 @@
 //
-//  OSCManager.hpp
+//  OSCManager.h
 //  OSC_MIDI_OSC
 //
 //  Created by Fred Rodrigues on 02/10/2023.
@@ -37,6 +37,7 @@ public:
   
     //public destructor
 	~OscManager();
+    void updateSettings();
 
 private:
     OscManager(); // Constructor is private now

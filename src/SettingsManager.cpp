@@ -19,6 +19,7 @@ void SettingsManager::loadSettings(const std::string& filename) {
 
         if (!settings["Log_level"].is_null()) {
             ofLogVerbose("loadSettings") << "Log level set to " << settings["Log_level"] << endl;
+            ofSetLogLevel(settings["Log_level"]);
         } else {
             settings["Log_level"] = OF_LOG_VERBOSE;
             ofLogVerbose("loadSettings fallback") << "Log level set to " << settings["Log_level"] << endl;

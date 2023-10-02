@@ -7,9 +7,6 @@
 
 #pragma once
 
-#ifndef MSCConstants_h
-#define MSCConstants_h
-
 #include <unordered_map>
 #include <string>
 
@@ -117,4 +114,3 @@ const std::unordered_map<uint8_t, std::string> MIDI_MACHINE_CONTROL_COMMAND_TYPE
     {0x0D, "MMC_RESET"}
 };
     
-#endif /* MSCConstants_h */

@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
     ofSetLogLevel(OF_LOG_VERBOSE);
-    font.load("frabk.ttf", 12);
+    font.load("frabk.ttf", 14);
     settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");
     appSettings = settingsManager.getSettings();
     midiManager.setup();
@@ -97,12 +97,13 @@ void ofApp::gotMessage(ofMessage msg) {
                 appSettings["midiInDeviceByString"] =  true;
                 settingsManager.saveSettings("MIDI_OSC_SETTINGS.json", appSettings);
                 midiManager.close();
-                settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");
+                midiManager.updateSettings();
                 midiManager.setup();
                 break;
 
             case BTN_MSG_MIDI_IN_CHANNEL_SET:
                 settingsManager.saveSettings("MIDI_OSC_SETTINGS.json", appSettings);
+                midiManager.updateSettings();
                 break;
 
             case BTN_MSG_MIDI_OUT_PORT_SET:
@@ -110,38 +111,35 @@ void ofApp::gotMessage(ofMessage msg) {
                 appSettings["midiOutDeviceByString"] =  true;
                 settingsManager.saveSettings("MIDI_OSC_SETTINGS.json", appSettings);
                 midiManager.close();
-                settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");
+                midiManager.updateSettings();
                 midiManager.setup();
                 
                 break;
 
             case BTN_MSG_MIDI_OUT_CHANNEL_SET:
                 settingsManager.saveSettings("MIDI_OSC_SETTINGS.json", appSettings);
-                settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");
-
+                midiManager.updateSettings();
                 break;
 
             case BTN_MSG_OSC_IN_PORT_SET:
                 oscManager.closeReceiver();
                 settingsManager.saveSettings("MIDI_OSC_SETTINGS.json", appSettings);
+                oscManager.updateSettings();
                 oscManager.setupReceiver();
-                settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");
 
                 break;
 
             case BTN_MSG_OST_OUT_PORT_SET:
                 oscManager.closeSender();
                 settingsManager.saveSettings("MIDI_OSC_SETTINGS.json", appSettings);
+                oscManager.updateSettings();
                 oscManager.setupSender();
-                settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");
 
                 break;
 
             case BTN_MSG_OST_OUT_IP_SET:
                 oscManager.closeSender();
-                ofLogVerbose() << "IP: " << appSettings["outgoingIpOSC"];
                 settingsManager.saveSettings("MIDI_OSC_SETTINGS.json", appSettings);
-                settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");
                 oscManager.setupSender();
                 break;
 

@@ -46,11 +46,11 @@ void ConversionMode::draw() {
 	ofSetColor(0);
     font.drawString("Conversion active", 10, 15);
     font.drawString(activityMessage, 10, 35);
-	font.drawString("Midi input on port " + settings["inPortLabel"].get<string>(), 10, 55);
-	font.drawString("Midi output on port " + settings["outPortLabel"].get<string>(), 10, 75);
+	font.drawString("Midi input on port " + settings["inPortLabel"].get<string>() + "  Channel: " + ofToString(settings["midiInChannel"]), 10, 55);
+	font.drawString("Midi output on port " + settings["outPortLabel"].get<string>() + "  Channel: " + ofToString(settings["midiOutChannel"]), 10, 75);
 	font.drawString("Osc input on port " + ofToString(settings["incomingPortOsc"]), 10, 95);
 	font.drawString("Osc output on port " + ofToString(settings["outGoingPortOsc"]), 10, 115);
-	font.drawString("Osc output to host " + ofToString(settings["outgoingIpOSC"]), 10, 140);
+	font.drawString("Osc output to host " + settings["outgoingIpOSC"].get<string>(), 10, 135);
 }
 
 void ConversionMode::update() {

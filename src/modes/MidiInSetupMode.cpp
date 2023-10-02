@@ -97,7 +97,6 @@ void MidiInSetupMode::selectPort(ofJson & ports, ofJson & currentPort, int direc
 	}
 }
 
-// Helper function to handle channel selection
 void MidiInSetupMode::selectChannel(ofJson & channel, int direction) {
 	int newChannel = ofClamp(channel.get<int>() + direction, 1, 16);
 

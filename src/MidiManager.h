@@ -1,5 +1,5 @@
 //
-//  MidiManager.hpp
+//  MidiManager.h
 //  OSC_MIDI_OSC
 //
 //  Created by Fred Rodrigues on 02/10/2023.
@@ -13,7 +13,7 @@
 #include "ofxMidi.h"
 #include "SettingsManager.h" // Include the SettingsManager header
 #include "OscManager.h"
-#include "MSCConstants.h"
+#include "MidiConstants.h"
 
 class MidiManager: public ofxMidiListener {
 public:
@@ -34,11 +34,12 @@ public:
     void newMidiMessage(ofxMidiMessage& msg);
     vector<unsigned char> sysexMMCMsg;
     vector<unsigned char> buildMMCMessaage(int deviceID, const std::string& command);
+    std::vector<unsigned char> buildMidiShowControlMessage(int deviceID, const std::string& targetType, const std::string& commandType, const std::vector<int>& commandData);
 
     //public destructor
 	~MidiManager();
 
-
+    void updateSettings();
 
 private:
     MidiManager();
@@ -59,7 +60,7 @@ private:
     uint8_t getDeviceIdByte(ofxMidiMessage midiMessage);
     int getMidiShowControldeviceId(uint8_t byte);
     std::vector<int> getMidiShowControlCommandData(ofxMidiMessage midiMessage);
-    
+
     
 
 };

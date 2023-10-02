@@ -23,19 +23,23 @@ void OscManager::setup() {
 	ofLogVerbose() << "OSC Receiver initialised and set to port: " << oscReceiver.getPort() << endl;
 }
 void OscManager::closeReceiver(){
-    oscReceiver.stop();
+    ///oscReceiver.stop();
 }
 void OscManager::setupReceiver(){
+    SettingsManager & settingsManager = SettingsManager::getInstance();
+    oscManagerSettings = settingsManager.getSettings();
     oscReceiver.setup(oscManagerSettings["incomingPortOsc"]);
     ofLogVerbose() << "OSC Receiver initialised and set to port: " << oscReceiver.getPort() << endl;
     oscReceiver.start();
 
 }
 void OscManager::closeSender(){
-    oscSender.clear();
+    //oscSender.clear();
     
 }
 void OscManager::setupSender(){
+    SettingsManager & settingsManager = SettingsManager::getInstance();
+    oscManagerSettings = settingsManager.getSettings();
     oscSender.setup(oscManagerSettings["outgoingIpOSC"], oscManagerSettings["outGoingPortOsc"]);
     ofLogVerbose() << "OSC Sender initialised and set to port: " << oscSender.getPort() << " With host: " << oscSender.getHost() << endl;
 
@@ -106,6 +110,21 @@ void OscManager::handleIncomingMessages() {
             midiOut.sendMidiBytes(midiBytes);
             message = "Sending MMC Command: " + command + " DeviceID: " + ofToString(deviceId);
         }
+        if(m.getAddress() == "/MidiShowControl"){
+            int deviceId = m.getArgAsInt32(0);
+            std::string command = m.getArgAsString(1);
+            std::string commandFormat = m.getArgAsString(2);
+            std::vector<int> commandData;
+            for(int i = 3; i < m.getNumArgs(); i++){  
+                commandData.push_back(m.getArgAsInt(i));
+            }
+            std::vector<unsigned char> midiBytes = midiManager.buildMidiShowControlMessage(deviceId, command, commandFormat, commandData);
+            midiOut.sendMidiBytes(midiBytes);
+            message = "Sending MSC Command: " + command + " DeviceID: " + ofToString(deviceId);
+            
+        }
+            
+            
         ofSendMessage(message);
     }
 }
@@ -117,4 +136,8 @@ OscManager::~OscManager() {
 
 
 	ofLogVerbose() << "OSC Manager destructor called" << endl;
+}
+void OscManager::updateSettings(){
+    SettingsManager & settingsManager = SettingsManager::getInstance();
+    oscManagerSettings = settingsManager.getSettings();
 }

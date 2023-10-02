@@ -13,7 +13,7 @@ OscInSetupMode::OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
 	oscInPortField.text = ofToString(settings["incomingPortOsc"]);
 	oscInPortField.bounds.x = 10;
 	oscInPortField.bounds.y = 35;
-    oscInPortField.bounds.height = font.getStringBoundingBox("1", 0, 0).height;
+    oscInPortField.bounds.height = font.getStringBoundingBox("1", 0, 0).height + 5;
 	oscInPortField.bounds.width = font.getStringBoundingBox(ofToString(settings["incomingPortOsc"]), 0, 0).width + 30;
 	oscInPortField.setFont(font);
 
@@ -41,7 +41,7 @@ void OscInSetupMode::draw() {
 	font.drawString("OSC in settings", 10, 15);
 	ofSetColor(0);
     ofNoFill();
-    ofDrawRectangle(oscInPortField.bounds);
+    ofDrawRectRounded(oscInPortField.bounds.x, oscInPortField.bounds.y + 8, oscInPortField.bounds.width, oscInPortField.bounds.height, 3);
 	oscInPortField.draw();
 }
 

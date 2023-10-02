@@ -1,5 +1,5 @@
 //
-//  MidiInSetupMode.cpp
+//  OscOutSetupMode.cpp
 //  OSC_MIDI_OSC
 //
 //  Created by Fred Rodrigues on 02/10/2023.
@@ -13,15 +13,15 @@ OscOutSetupMode::OscOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
 	oscOutPortField.text = ofToString(settings["outGoingPortOsc"]);
 	oscOutPortField.bounds.x = 10;
 	oscOutPortField.bounds.y = 35;
-	oscOutPortField.bounds.height = font.getStringBoundingBox("1", 0, 0).height;
+    oscOutPortField.bounds.height = font.getStringBoundingBox("1", 0, 0).height + 5;
     oscOutPortField.bounds.width = font.getStringBoundingBox(ofToString(settings["outGoingPortOsc"]), 0, 0).width + 30;
 	oscOutPortField.setFont(font);
 
 	oscOutIPField.setup();
 	oscOutIPField.text = settings["outgoingIpOSC"];
 	oscOutIPField.bounds.x = 10;
-	oscOutIPField.bounds.y = 50;
-	oscOutIPField.bounds.height = font.getStringBoundingBox("1", 0, 0).height;
+	oscOutIPField.bounds.y = 60;
+	oscOutIPField.bounds.height = font.getStringBoundingBox("1", 0, 0).height + 5;
     oscOutIPField.bounds.width = font.getStringBoundingBox(ofToString(settings["outgoingIpOSC"]), 0, 0).width + 30;;
 	oscOutIPField.setFont(font);
 
@@ -56,11 +56,10 @@ void OscOutSetupMode::draw() {
     
 	ofSetColor(0);
     ofNoFill();
-    
-	ofDrawRectangle(oscOutPortField.bounds);
+    ofDrawRectRounded(oscOutPortField.bounds.x, oscOutPortField.bounds.y + 8, oscOutPortField.bounds.width, oscOutPortField.bounds.height, 3);
 	oscOutPortField.draw();
     
-    ofDrawRectangle(oscOutIPField.bounds);
+    ofDrawRectRounded(oscOutIPField.bounds.x, oscOutIPField.bounds.y + 8, oscOutIPField.bounds.width, oscOutIPField.bounds.height, 3);
 	oscOutIPField.draw();
 }
 
