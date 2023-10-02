@@ -5,6 +5,7 @@
 #include "MidiManager.h"
 #include "OscManager.h"
 #include "ofxTextInputField.h"
+#include "simpleButton.h"
 
 
 enum OperationMode {
@@ -14,6 +15,22 @@ enum OperationMode {
     MODE_SETTING_OSC_OUT,
     MODE_CONVERSION
 };
+
+enum buttonMesssages {
+    BTN_MSG_MIDI_IN_PORT_SET,
+    BTN_MSG_MIDI_IN_CHANNEL_SET,
+    BTN_MSG_MIDI_OUT_PORT_SET,
+    BTN_MSG_MIDI_OUT_CHANNEL_SET,
+    BTN_MSG_OSC_IN_PORT_SET,
+    BTN_MSG_OST_OUT_PORT_SET,
+    BTN_MSG_OST_OUT_IP_SET,
+    BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_IN,
+    BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_OUT,
+    BTN_MSG_GOTOMODE_MODE_SETTING_OSC_IN,
+    BTN_MSG_GOTOMODE_MODE_SETTING_OSC_OUT,
+    BTN_MSG_GOTOMODE_MODE_CONVERSION
+};
+
 
 const int MAX_MIDI_CHANNEL = 16;
 
@@ -66,6 +83,73 @@ class ofApp : public ofBaseApp {
     void onOSCOutputPortEditied(string& message);
     void onOSCOutputIPEditied(string& message);
     
+    ofTrueTypeFont font;
+    
+    void setupMidPortOutSetupMode();
+    void drawMidiPortOutSetupMode();
+    void updateMidiPortOutSetupMode();
+    void exitMidiPortOutSetupMode();
+    
+    simpleButton goToMidiOutSetMode;
+    simpleButton goToMidiInSetMode;
+    simpleButton gotToOSCOutSetMode;
+    simpleButton goToOSCInSetMode;
+    simpleButton GoToConversionMode;
+  
+    simpleButton saveMidiOutPortSettings;
+    simpleButton saveMidiOutChannelSettings;
+    simpleButton saveMidiInPortSettings;
+    simpleButton saveMidiInChannelSettings;
+    
+    
+    simpleButton saveOSCOutPortSettings;
+    simpleButton saveOSCOutIptSettings;
+    simpleButton saveOSCInPortSettings;
+    
+    void setupAllButtons();
+    void disableAllButtons();
+    void disableGlobalButtons();
+    void enableGlobalButtons();
+    
+    void setupMidPortInSetupMode();
+    void drawMidiPortInSetupMode();
+    void updateMidiPortInSetupMode();
+    void exitMidiPortInSetupMode();
+    
+    
+    void setupOSCInSetupMode();
+    void drawOSCInSetupMode();
+    void updateOSCInSetupMode();
+    void exitOSCInSetupMode();
+    
+    void setupOSCOutSetupMode();
+    void drawOSCOutSetupMode();
+    void updateOSCOutSetupMode();
+    void exitOSCOutSetupMode();
+    
+    void setupConversionMode();
+    void drawConversionMode();
+    void updateConversionMode();
+    void exitConversionMode();
+    
+    void exitAllModes();
+    void goToMode(int mode);
     
 
+    std::unordered_map<std::string, int> buttonMessagesMap = {
+        {"BTN_MSG_MIDI_IN_PORT_SET", 0},
+        {"BTN_MSG_MIDI_IN_CHANNEL_SET", 1},
+        {"BTN_MSG_MIDI_OUT_PORT_SET", 2},
+        {"BTN_MSG_MIDI_OUT_CHANNEL_SET", 3},
+        {"BTN_MSG_OSC_IN_PORT_SET", 4},
+        {"BTN_MSG_OST_OUT_PORT_SET", 5},
+        {"BTN_MSG_OST_OUT_IP_SET", 6},
+        {"BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_IN", 7},
+        {"BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_OUT", 8},
+        {"BTN_MSG_GOTOMODE_MODE_SETTING_OSC_IN", 9},
+        {"BTN_MSG_GOTOMODE_MODE_SETTING_OSC_OUT", 10},
+        {"BTN_MSG_GOTOMODE_MODE_CONVERSION", 11}
+    };
+
 };
+
