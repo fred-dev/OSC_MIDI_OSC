@@ -54,118 +54,120 @@ This application was made as a helper for people using software that does not su
 software. It was developed as part of Crosstalk Body and Technology Laboratory in Tehran in 2015 by Frederick Rodrigues.
 
 
-##UPDATE
+## UPDATE
 Now includes Midi Machine control
 
 The app wll output MMC commands from the following OSC inputs, add an int argument for the device ID and a string argument for the command
 
 Address: "/MMCCommand"
-"STOP"
-"PLAY"
-"DEFERRED_PLAY"
-"FAST_FORWARD"
-"REWIND"
-"RECORD_STROBE"
-"RECORD_EXIT"
-"RECORD_PAUSE"
-"PAUSE"
-"EJECT"
-"CHASE"
-"COMMAND_ERROR_RESET"
-"MMC_RESET"
+- **STOP**
+- **PLAY**
+- **DEFERRED_PLAY**
+- **FAST_FORWARD**
+- **REWIND**
+- **RECORD_STROBE**
+- **RECORD_EXIT**
+- **RECORD_PAUSE**
+- **PAUSE**
+- **EJECT**
+- **CHASE**
+- **COMMAND_ERROR_RESET**
+- **MMC_RESET**
+
 
 The app will also output these commands over OSC when receiving the relevant MMC commands in the midi input port
 
-##UPDATE
+## UPDATE
 Midi Show Control is now included, but in a betish kind of way.
 The app wll output Midi Show Control commands from the following OSC inputs, add an int argument for the device ID, a string argument 
 for the command target and another string argument for the command type, lastly add extra integer arguments for the command payload (up to 3)
 
-###Here are the command targets:
-"Lighting"
-"Moving_Lights"
-"Colour_Changers"
-"Strobes"
-"Lasers"
-"Chasers"
-"Sound"
-"Music"
-"CD_Players"
-"EPROM_Playback"
-"Audio_Tape_Machines"
-"Intercoms"
-"Amplifiers"
-"Audio_Effects_Devices"
-"Equalisers"
-"Machinery"
-"Rigging"
-"Flys"
-"Lifts"
-"Turntables"
-"Trusses"
-"Robots"
-"Animation"
-"Floats"
-"Breakaways"
-"Barges"
-"Video"
-"Video_Tape_Machines"
-"Video_Cassette_Machines"
-"Video_Disc_Players"
-"Video_Switchers"
-"Video_Effects"
-"Video_Character_Generators"
-"Video_Still_Stores"
-"Video_Monitors"
-"Projection"
-"Film_Projectors"
-"Slide_Projectors"
-"Video_Projectors"
-"Dissolvers"
-"Shutter_Controls"
-"Process_Control"
-"Hydraulic_Oil"
-"H20"
-"CO2"
-"Compressed_Air"
-"Natural_Gas"
-"Fog"
-"Smoke"
-"Cracked_Haze"
-"Pyro"
-"Fireworks"
-"Explosions"
-"Flame"
-"Smoke_pots"
-"All_types"
+### Here are the command targets:
+- **Lighting**
+- **Moving_Lights**
+- **Colour_Changers**
+- **Strobes**
+- **Lasers**
+- **Chasers**
+- **Sound**
+- **Music**
+- **CD_Players**
+- **EPROM_Playback**
+- **Audio_Tape_Machines**
+- **Intercoms**
+- **Amplifiers**
+- **Audio_Effects_Devices**
+- **Equalisers**
+- **Machinery**
+- **Rigging**
+- **Flys**
+- **Lifts**
+- **Turntables**
+- **Trusses**
+- **Robots**
+- **Animation**
+- **Floats**
+- **Breakaways**
+- **Barges**
+- **Video**
+- **Video_Tape_Machines**
+- **Video_Cassette_Machines**
+- **Video_Disc_Players**
+- **Video_Switchers**
+- **Video_Effects**
+- **Video_Character_Generators**
+- **Video_Still_Stores**
+- **Video_Monitors**
+- **Projection**
+- **Film_Projectors**
+- **Slide_Projectors**
+- **Video_Projectors**
+- **Dissolvers**
+- **Shutter_Controls**
+- **Process_Control**
+- **Hydraulic_Oil**
+- **H20**
+- **CO2**
+- **Compressed_Air**
+- **Natural_Gas**
+- **Fog**
+- **Smoke**
+- **Cracked_Haze**
+- **Pyro**
+- **Fireworks**
+- **Explosions**
+- **Flame**
+- **Smoke_pots**
+- **All_types**
 
-###And here are the command types:
+### And here are the command types:
 
-"GO"
-"STOP"
-"RESUME"
-"TIMED_GO"
-"LOAD"
-"SET"
-"FIRE"
-"ALL_OFF"
-"RESTORE"
-"RESET"
-"GO_OFF"
-"GO_JAM_CLOCK"
-"STANDBY+"
-"STANDBY-"
-"SEQUENCE+"
-"SEQUENCE-"
-"START_CLOCK"
-"STOP_CLOCK"
-"ZERO_CLOCK"
-"SET_CLOCK"
-"MTC_CHASE_ON"
-"MTC_CHASE_OFF"
-"OPEN_CUE_LIST"
-"CLOSE_CUE_LIST"
-"OPEN_CUE_PATH"
+- **GO**
+- **STOP**
+- **RESUME**
+- **TIMED_GO**
+- **LOAD**
+- **SET**
+- **FIRE**
+- **ALL_OFF**
+- **RESTORE**
+- **RESET**
+- **GO_OFF**
+- **GO_JAM_CLOCK**
+- **STANDBY+**
+- **STANDBY-**
+- **SEQUENCE+**
+- **SEQUENCE-**
+- **START_CLOCK**
+- **STOP_CLOCK**
+- **ZERO_CLOCK**
+- **SET_CLOCK**
+- **MTC_CHASE_ON**
+- **MTC_CHASE_OFF**
+- **OPEN_CUE_LIST**
+- **CLOSE_CUE_LIST**
+- **OPEN_CUE_PATH**
+
 
 
 To use this with windows make sure you install some kind of virtual midi port- we used Loopmidi from Tobias Erichsen you can download it here:
