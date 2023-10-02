@@ -25,6 +25,7 @@ void MidiInSetupMode::setup() {
 
 	saveMidiInPortSettings.enableAllEvents();
 	saveMidiInChannelSettings.enableAllEvents();
+	ofAddListener(ofEvents().keyPressed, this, &MidiInSetupMode::_keyPressed);
 }
 
 void MidiInSetupMode::draw() {
@@ -55,11 +56,13 @@ void MidiInSetupMode::update() {
 
 void MidiInSetupMode::exit() {
 	saveMidiInPortSettings.disableAllEvents();
-
 	saveMidiInChannelSettings.disableAllEvents();
+	ofRemoveListener(ofEvents().keyPressed, this, &MidiInSetupMode::_keyPressed);
 }
 
-void MidiInSetupMode::keyPressed(int key) {
+void MidiInSetupMode::_keyPressed(ofKeyEventArgs & e) {
+	int key = e.key;
+
 	if (key == OF_KEY_DOWN) {
 		selectPort(settings["allInPorts"], settings["inPortLabel"], 1);
 	}

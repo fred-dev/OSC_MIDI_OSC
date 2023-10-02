@@ -5,6 +5,7 @@
 //  Created by Fred Rodrigues on 02/10/2023.
 //
 
+
 #include <stdio.h>
 
 #include "modes/Mode.h"
@@ -22,7 +23,9 @@ public:
 	void draw() override;
 	void update() override;
 	void exit() override;
-	void keyPressed(int key) override;
+	void keyPressed(int key) { }
+
+	void _keyPressed(ofKeyEventArgs & e);
 	simpleButton saveMidiInPortSettings;
 	simpleButton saveMidiInChannelSettings;
 

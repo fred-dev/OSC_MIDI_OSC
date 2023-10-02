@@ -25,6 +25,7 @@ void MidiOutSetupMode::setup() {
 
 	saveMidiOutPortSettings.enableAllEvents();
 	saveMidiOutChannelSettings.enableAllEvents();
+	ofAddListener(ofEvents().keyPressed, this, &MidiOutSetupMode::_keyPressed);
 }
 
 void MidiOutSetupMode::draw() {
@@ -55,11 +56,13 @@ void MidiOutSetupMode::update() {
 
 void MidiOutSetupMode::exit() {
 	saveMidiOutPortSettings.disableAllEvents();
-
 	saveMidiOutChannelSettings.disableAllEvents();
+	ofRemoveListener(ofEvents().keyPressed, this, &MidiOutSetupMode::_keyPressed);
 }
 
-void MidiOutSetupMode::keyPressed(int key) {
+void MidiOutSetupMode::_keyPressed(ofKeyEventArgs & e) {
+	int key = e.key;
+
 	if (key == OF_KEY_DOWN) {
 		selectPort(settings["allInPorts"], settings["inPortLabel"], 1);
 	}

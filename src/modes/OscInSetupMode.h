@@ -20,11 +20,13 @@ private:
 		OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
 		~OscInSetupMode();
 
-		void setup() ;
-		void draw() ;
-		void update() ;
-		void exit() ;
-		void keyPressed(int key) ;
+		void setup() override;
+		void draw() override;
+		void update() override;
+		void exit() override;
+		void keyPressed(int key) { }
+
+		void _keyPressed(ofKeyEventArgs & e);
 		simpleButton saveMidiInPortSettings;
 		simpleButton saveMidiInChannelSettings;
 

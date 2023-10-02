@@ -17,8 +17,6 @@ OscOutSetupMode::OscOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
 	oscOutPortField.bounds.width = 188;
 	oscOutPortField.setFont(font);
 
-	ofAddListener(oscOutPortField.onTextChange, this, &OscOutSetupMode::onOSCOutputPortEditied);
-
 	oscOutIPField.setup();
 	oscOutIPField.text = settings["outgoingIpOSC"];
 	oscOutIPField.bounds.x = 10;
@@ -26,9 +24,6 @@ OscOutSetupMode::OscOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
 	oscOutIPField.bounds.height = 15;
 	oscOutIPField.bounds.width = 188;
 	oscOutIPField.setFont(font);
-
-	ofAddListener(oscOutIPField.onTextChange, this, &OscOutSetupMode::onOSCOutputIPEditied);
-
 
 	saveOSCOutPortSettings.setup("Save OSC in port settings", "BTN_MSG_OSC_IN_PORT_SET");
 	saveOSCOutPortSettings.set(200, 200, 200, 20);
@@ -51,6 +46,9 @@ void OscOutSetupMode::setup() {
 	saveOSCOutPortSettings.enableAllEvents();
 	saveOSCOutIptSettings.enableAllEvents();
 	GoToConversionMode.enableAllEvents();
+	ofAddListener(oscOutPortField.onTextChange, this, &OscOutSetupMode::onOSCOutputPortEditied);
+	ofAddListener(oscOutIPField.onTextChange, this, &OscOutSetupMode::onOSCOutputIPEditied);
+	ofAddListener(ofEvents().keyPressed, this, &OscOutSetupMode::_keyPressed);
 }
 
 void OscOutSetupMode::draw() {
@@ -73,10 +71,14 @@ void OscOutSetupMode::exit() {
 	oscOutIPField.enable();
 	saveOSCOutPortSettings.disableAllEvents();
 	saveOSCOutIptSettings.disableAllEvents();
+	ofRemoveListener(oscOutPortField.onTextChange, this, &OscOutSetupMode::onOSCOutputPortEditied);
+	ofRemoveListener(oscOutIPField.onTextChange, this, &OscOutSetupMode::onOSCOutputIPEditied);
 }
 
-void OscOutSetupMode::keyPressed(int key) {
-	// Implementation
+
+void OscOutSetupMode::_keyPressed(ofKeyEventArgs & e) {
+	int key = e.key;
+	ofLogVerbose("OscOutSetupMode") << "keyPressed: " << key;
 }
 
 void OscOutSetupMode::onOSCOutputIPEditied(string& message) {

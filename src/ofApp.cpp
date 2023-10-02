@@ -12,28 +12,44 @@ void ofApp::setup() {
 
     activityMessage = "No messages received";
 
-    midiInSetupMode = std::make_unique<MidiInSetupMode>(font, appSettings);
-    midiOutSetupMode = std::make_unique<MidiOutSetupMode>(font, appSettings);
-    oscInSetupMode = std::make_unique<OscInSetupMode>(font, appSettings);
-    oscOutSetupMode = std::make_unique<OscOutSetupMode>(font, appSettings);
-    conversionMode = std::make_unique<ConversionMode>(font, appSettings);
+    midiInSetupMode = std::make_shared<MidiInSetupMode>(font, appSettings);
+	midiOutSetupMode = std::make_shared<MidiOutSetupMode>(font, appSettings);
+	oscInSetupMode = std::make_shared<OscInSetupMode>(font, appSettings);
+	oscOutSetupMode = std::make_shared<OscOutSetupMode>(font, appSettings);
+	conversionMode = std::make_shared<ConversionMode>(font, appSettings);
 
-	modeManager.setMode(std::move(conversionMode));
-
+	modeManager.setMode(conversionMode);
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
+    modeManager.update();
    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-  
+    modeManager.draw();
+	ofDrawBitmapString(activityMessage, 10, 10);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
+	if (key == '1') {
+		modeManager.setMode(midiInSetupMode);
+	}
+	if (key == '2') {
+		modeManager.setMode(midiOutSetupMode);
+	}
+	if (key == '3') {
+		modeManager.setMode(oscInSetupMode);
+	}
+	if (key == '4') {
+		modeManager.setMode(oscOutSetupMode);
+	}
+	if (key == '5') {
+		modeManager.setMode(conversionMode);
+	}
 
 }
 

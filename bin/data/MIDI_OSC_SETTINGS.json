@@ -1,23 +1,30 @@
 {
     "Log_level": 0,
     "allInPorts": [
-        "IAC Driver Bus 1",
-        "Euphonix MIDI Euphonix Port 1",
-        "Euphonix MIDI Euphonix Port 2",
-        "Euphonix MIDI Euphonix Port 3",
-        "Euphonix MIDI Euphonix Port 4",
-        "Isadora Virtual Out"
+        "Euphonix EuMidi1 0",
+        "Euphonix EuMidi2 1",
+        "Euphonix EuMidi3 2",
+        "Euphonix EuMidi4 3",
+        "Euphonix EuMidi5 4",
+        "Euphonix EuMidi6 5",
+        "Euphonix EuMidi7 6",
+        "Euphonix EuMidi8 7",
+        "loopMIDI Port 8"
     ],
     "allOutPorts": [
-        "IAC Driver Bus 1",
-        "Euphonix MIDI Euphonix Port 1",
-        "Euphonix MIDI Euphonix Port 2",
-        "Euphonix MIDI Euphonix Port 3",
-        "Euphonix MIDI Euphonix Port 4",
-        "Isadora Virtual In"
+        "Microsoft GS Wavetable Synth 0",
+        "Euphonix EuMidi1 1",
+        "Euphonix EuMidi2 2",
+        "Euphonix EuMidi3 3",
+        "Euphonix EuMidi4 4",
+        "Euphonix EuMidi5 5",
+        "Euphonix EuMidi6 6",
+        "Euphonix EuMidi7 7",
+        "Euphonix EuMidi8 8",
+        "loopMIDI Port 9"
     ],
     "frameRate": 25,
-    "inPortLabel": "IAC Driver Bus 1",
+    "inPortLabel": "loopMIDI Port 8",
     "incomingPortOsc": 12345,
     "midiInChannel": 1,
     "midiInDevice": 8,
@@ -29,7 +36,7 @@
     "midiOutDeviceByString": false,
     "midiOutDeviceNum": null,
     "outGoingPortOsc": 1234,
-    "outPortLabel": "IAC Driver Bus 1",
+    "outPortLabel": "loopMIDI Port 9",
     "outgoingIpOSC": "127.0.0.1",
     "useVirtualPort": false
 }

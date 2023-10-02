@@ -19,11 +19,13 @@ public:
 	MidiInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
 	~MidiInSetupMode();
 
-    void setup() ;
-    void draw() ;
-    void update() ;
-    void exit() ;
-    void keyPressed(int key) ;
+    void setup() override;
+	void draw() override;
+	void update() override;
+	void exit() override;
+	void keyPressed(int key) { }
+
+	void _keyPressed(ofKeyEventArgs & e);
 	simpleButton saveMidiInPortSettings;
 	simpleButton saveMidiInChannelSettings;
 	void selectPort(ofJson & ports, ofJson & currentPort, int direction);

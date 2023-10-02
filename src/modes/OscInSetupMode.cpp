@@ -17,7 +17,6 @@ OscInSetupMode::OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
 	oscInPortField.bounds.width = 188;
 	oscInPortField.setFont(font);
 
-	ofAddListener(oscInPortField.onTextChange, this, &OscInSetupMode::onOSCInputPortEditied);
 
 	saveOSCInPortSettings.setup("Save OSC in port settings", "BTN_MSG_OSC_IN_PORT_SET");
 	saveOSCInPortSettings.set(200, 200, 200, 20);
@@ -34,6 +33,9 @@ void OscInSetupMode::setup() {
 	oscInPortField.enable();
 	saveOSCInPortSettings.enableAllEvents();
 	GoToConversionMode.enableAllEvents();
+	ofAddListener(oscInPortField.onTextChange, this, &OscInSetupMode::onOSCInputPortEditied);
+
+	ofAddListener(ofEvents().keyPressed, this, &OscInSetupMode::_keyPressed);
 }
 
 void OscInSetupMode::draw() {
@@ -52,10 +54,14 @@ void OscInSetupMode::exit() {
 	oscInPortField.disable();
 	saveOSCInPortSettings.disableAllEvents();
 	GoToConversionMode.disableAllEvents();
+	ofRemoveListener(oscInPortField.onTextChange, this, &OscInSetupMode::onOSCInputPortEditied);
+	ofRemoveListener(ofEvents().keyPressed, this, &OscInSetupMode::_keyPressed);
 }
 
-void OscInSetupMode::keyPressed(int key) {
-    // Implementation
+
+void OscInSetupMode::_keyPressed(ofKeyEventArgs & e) {
+	int key = e.key;
+    ofLogVerbose() << "keyPressed: " << key;
 }
 
 void OscInSetupMode::onOSCInputPortEditied(string & message) {

@@ -75,11 +75,11 @@ class ofApp : public ofBaseApp {
 
     ModeManager modeManager; // If you have a separate class for ModeManager
 
-	std::unique_ptr<Mode> midiInSetupMode;
-	std::unique_ptr<Mode> midiOutSetupMode;
-	std::unique_ptr<Mode> oscInSetupMode;
-	std::unique_ptr<Mode> oscOutSetupMode;
-	std::unique_ptr<Mode> conversionMode;
+	std::shared_ptr<Mode> midiInSetupMode;
+	std::shared_ptr<Mode> midiOutSetupMode;
+	std::shared_ptr<Mode> oscInSetupMode;
+	std::shared_ptr<Mode> oscOutSetupMode;
+	std::shared_ptr<Mode> conversionMode;
 
 
 
