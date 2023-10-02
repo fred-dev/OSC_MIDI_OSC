@@ -5,6 +5,7 @@
 //  Created by Fred Rodrigues on 02/10/2023.
 //
 
+#pragma once
 
 
 #include <stdio.h>
@@ -24,7 +25,7 @@ private:
 		void draw() override;
 		void update() override;
 		void exit() override;
-		void keyPressed(int key) { }
+		void keyPressed(int key) override{ }
 
 		void _keyPressed(ofKeyEventArgs & e);
 		simpleButton saveMidiInPortSettings;

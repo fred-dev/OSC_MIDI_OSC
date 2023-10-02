@@ -5,6 +5,8 @@
 //  Created by Fred Rodrigues on 29/09/2023.
 //
 
+#pragma once
+
 #ifndef MSCConstants_h
 #define MSCConstants_h
 

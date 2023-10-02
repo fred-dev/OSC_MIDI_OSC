@@ -20,7 +20,7 @@ public:
 	void draw() override;
 	void update() override;
 	void exit() override;
-	void keyPressed(int key) { }
+	void keyPressed(int key) override{ }
 
 	void _keyPressed(ofKeyEventArgs & e);
 	simpleButton saveMidiOutPortSettings;

@@ -163,11 +163,22 @@ void MidiManager::newMidiMessage(ofxMidiMessage& msg) {
         }
 
         if (midiMessage.status == MIDI_CONTROL_CHANGE) {
-            m.setAddress("/cc");
-            m.addIntArg(midiMessage.control);
-            m.addIntArg(midiMessage.value);
-            
-            message = "Received Controller ID: " + ofToString(midiMessage.control) + "  Value: " + ofToString(midiMessage.value);
+            if (midiMessage.control == 0) { // Bank Select MSB
+                m.setAddress("/bankSelectMSB");
+                m.addIntArg(midiMessage.value);
+                message = "Received Bank Select MSB: " + ofToString(midiMessage.value);
+                
+            } else if (midiMessage.control == 32) { // Bank Select LSB
+                m.setAddress("/bankSelectLSB");
+                m.addIntArg(midiMessage.value);
+                message = "Received Bank Select LSB: " + ofToString(midiMessage.value);
+                
+            } else {
+                m.setAddress("/cc");
+                m.addIntArg(midiMessage.control);
+                m.addIntArg(midiMessage.value);
+                message = "Received Controller ID: " + ofToString(midiMessage.control) + "  Value: " + ofToString(midiMessage.value);
+            }
         }
 
         if (midiMessage.status == MIDI_TIME_CODE) {
