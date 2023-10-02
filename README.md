@@ -16,7 +16,9 @@ Follow the instructions for setting up openframeworks on your platform.
 Navigate to openframeworksRoot/myApps/ and clone this repository.
 
 Navigate to openframeworksRoot/addons/ and clone the ofxMidi repository (https://github.com/danomatika/ofxMidi)
+
 Navigate to openframeworksRoot/addons/ and clone the ofxTextInputField repository (https://github.com/Flightphase/ofxTextInputField)
+
 Navigate to openframeworksRoot/addons/ and clone the ofxMSAInteractiveObject repository (https://github.com/memo/ofxMSAInteractiveObject)
 
 Use the project generator for your platform to generate a project to work with.
