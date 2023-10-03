@@ -1,4 +1,7 @@
 # OSC_MIDI_OSC
+![logo](/Icon/midi-osc-midi.png)
+
+![logo](/screenshots/Conversion.jpg)
 
 A straightforward cross-platform converter for OSC to MIDI and MIDI to OSC. Designed for zero-configuration, simply set your MIDI and OSC ports, and the software will handle the translation between MIDI and OSC seamlessly. It operates bidirectionally, performing both functions simultaneously.
 
