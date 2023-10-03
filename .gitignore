@@ -1,15 +1,13 @@
 # Ignore all files by default
 *
 
-
 # Allow directories and files
 !/src/
 !/addons.make
 !/README.md
-!/bin/data/MIDI_OSC_SETTINGS.json
-!/bin/data/Gaultier-Regular.ttf
+!/bin/data/
+!/Icon/
+!/screenshots/
+
+# Exclude all .DS_Store files
 .DS_Store
-!/Icon/midi-osc-midi.png
-!/Icon/midi-osc-midi.ico
-!/Icon/midi-osc-midi.icns
-midi-osc-midi.png
