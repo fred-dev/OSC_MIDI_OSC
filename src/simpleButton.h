@@ -7,6 +7,7 @@
 
 #pragma once
 #include "ofxMSAInteractiveObject.h"
+#include "colours.h"
 
 #define IDLE_COLOR 0x2860bd
 #define OVER_COLOR 0xbd5928
@@ -17,11 +18,11 @@ public:
 	string buttonLabel;
 	string buttonMessage;
 	ofTrueTypeFont drawFont;
-
+    Colours colours;
 	void setup(string label, string message) {
 		enableMouseEvents();
 		enableKeyEvents();
-
+        
 		buttonLabel = label;
 		buttonMessage = message;
 		drawFont.load("frabk.ttf", 12);
@@ -37,11 +38,11 @@ public:
 		ofPushStyle();
 
 		if (isMousePressed()) {
-			ofSetHexColor(DOWN_COLOR);
+            ofSetColor(colours.buttonActive);
 		} else if (isMouseOver()) {
-			ofSetHexColor(OVER_COLOR);
+            ofSetColor(colours.buttonActive);
 		} else {
-			ofSetHexColor(IDLE_COLOR);
+            ofSetColor(colours.button);
 		}
 
 		ofNoFill();

@@ -8,8 +8,8 @@
 
 #include "MidiOutSetupMode.h"
 
-MidiOutSetupMode::MidiOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
-	: Mode(fontRef, settingsRef) { 
+MidiOutSetupMode::MidiOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef)
+    : Mode(fontRef, settingsRef, coloursRef) { 
 	saveMidiOutPortSettings.setup("Set midi out port", "BTN_MSG_MIDI_OUT_PORT_SET");
 	saveMidiOutPortSettings.set(30, 175, 140, 20);
 	saveMidiOutPortSettings.disableAllEvents();
@@ -34,7 +34,7 @@ void MidiOutSetupMode::setup() {
 }
 
 void MidiOutSetupMode::draw() {
-    ofSetColor(40,96,189);
+    ofSetColor(colours.text);
 
 	font.drawString(title, 10, 15);
     font.drawString("Use the up & down keys to set the port and the < and > to set the channel", 10, 35);
@@ -44,19 +44,30 @@ void MidiOutSetupMode::draw() {
 		ofPushStyle();
 
 		if (settings["allOutPorts"][i] == settings["outPortLabel"]) {
-			ofSetColor(189,89,40);
+            ofSetColor(colours.buttonActive);
 		} else {
-            ofSetColor(40,96,189);
+            ofSetColor(colours.text);
 
 		}
-
+        
 		font.drawString(settings["allOutPorts"][i], 10, 55 + (i * 15));
 		ofPopStyle();
 	}
 
 	// Draw the midi channel to the right of these messages
-    ofSetColor(40,96,189);
-	font.drawString("Midi channel set to: " + ofToString(settings["midiOutChannel"]), 320, 55);
+    ofSetColor(colours.text);
+    // we want to draw this string font.drawString("Midi channel set to: " + ofToString(settings["midiOutChannel"]), 320, 55) but the ofToString(settings["midiOutChannel"]) part should be a different colour
+    font.drawString("Midi channel set to: ", 320, 55);
+    ofSetColor(colours.buttonActive);
+    int xPos = font.getStringBoundingBox("Midi channel set to: ", 320, 55).x + font.getStringBoundingBox("Midi channel set to: ", 320, 55).width;
+    font.drawString( ofToString(settings["midiOutChannel"]), xPos, 55);
+    
+    
+    
+    
+    
+    
+	//font.drawString("Midi channel set to: " + ofToString(settings["midiOutChannel"]), 320, 55);
 }
 
 void MidiOutSetupMode::update() {

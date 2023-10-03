@@ -13,6 +13,7 @@
 #include "modes/OscInSetupMode.h"
 #include "modes/OscOutSetupMode.h"
 #include "modes/ConversionMode.h"
+#include "colours.h"
 
 
 
@@ -99,6 +100,7 @@ class ofApp : public ofBaseApp {
         {"BTN_MSG_GOTOMODE_MODE_CONVERSION", 11}
     };
 	
-  
+  Colours colours;
+
 };
 

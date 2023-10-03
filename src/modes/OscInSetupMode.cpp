@@ -7,8 +7,8 @@
 
 #include "OscInSetupMode.h"
 
-OscInSetupMode::OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
-	: Mode(fontRef, settingsRef) { 
+OscInSetupMode::OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef)
+    : Mode(fontRef, settingsRef, coloursRef) { 
     oscInPortField.setup();
 	oscInPortField.text = ofToString(settings["incomingPortOsc"]);
 	oscInPortField.bounds.x = 10;
@@ -38,9 +38,10 @@ void OscInSetupMode::setup() {
 }
 
 void OscInSetupMode::draw() {
-    ofSetColor(40,96,189);
+    ofSetColor(colours.text);
 	font.drawString("OSC in settings", 10, 15);
     ofPushStyle();
+    ofSetColor(colours.buttonActive);
     ofFill();
     ofDrawRectRounded(oscInPortField.bounds.x, oscInPortField.bounds.y + 8, oscInPortField.bounds.width, oscInPortField.bounds.height, 3);
     ofPopStyle();

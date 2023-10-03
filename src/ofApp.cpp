@@ -12,11 +12,11 @@ void ofApp::setup() {
 
     activityMessage = "No messages received";
 
-    midiInSetupMode = std::make_shared<MidiInSetupMode>(font, appSettings);
-	midiOutSetupMode = std::make_shared<MidiOutSetupMode>(font, appSettings);
-	oscInSetupMode = std::make_shared<OscInSetupMode>(font, appSettings);
-	oscOutSetupMode = std::make_shared<OscOutSetupMode>(font, appSettings);
-	conversionMode = std::make_shared<ConversionMode>(font, appSettings);
+    midiInSetupMode = std::make_shared<MidiInSetupMode>(font, appSettings, colours);
+	midiOutSetupMode = std::make_shared<MidiOutSetupMode>(font, appSettings, colours);
+	oscInSetupMode = std::make_shared<OscInSetupMode>(font, appSettings, colours);
+	oscOutSetupMode = std::make_shared<OscOutSetupMode>(font, appSettings, colours);
+	conversionMode = std::make_shared<ConversionMode>(font, appSettings, colours);
 
 	modeManager.setMode(conversionMode);
 }
@@ -29,7 +29,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    ofSetBackgroundColor(255,216,139);
+    ofSetBackgroundColor(colours.background);
     modeManager.draw();
 }
 

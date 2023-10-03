@@ -10,16 +10,18 @@
 #include "ofMain.h"
 #include "stdio.h"
 #include "simpleButton.h"   
-
+#include "colours.h"
 
 class Mode {
     protected:
 	ofTrueTypeFont & font;
 	ofJson & settings;
 	std::string title;
+    Colours & colours;
+
 
 public:
-	Mode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
+	Mode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef);
 	virtual ~Mode();
 
     virtual void setup() = 0;

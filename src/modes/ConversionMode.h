@@ -16,7 +16,7 @@ private:
     std::string activityMessage = "Waiting for input......";
 
 public:
-	ConversionMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
+	ConversionMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef);
 	~ConversionMode();
 
 	void setup() override;

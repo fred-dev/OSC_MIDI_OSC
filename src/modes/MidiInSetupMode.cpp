@@ -8,8 +8,8 @@
 #include "MidiInSetupMode.h"
 
 
-MidiInSetupMode::MidiInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
-	: Mode(fontRef, settingsRef) { 
+MidiInSetupMode::MidiInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef)
+    : Mode(fontRef, settingsRef, coloursRef) {
 	saveMidiInPortSettings.setup("Set midi in port", "BTN_MSG_MIDI_IN_PORT_SET");
 	saveMidiInPortSettings.set(30, 175, 140, 20);
 	saveMidiInPortSettings.disableAllEvents();
@@ -34,7 +34,7 @@ void MidiInSetupMode::setup() {
 }
 
 void MidiInSetupMode::draw() {
-    ofSetColor(40,96,189);
+    ofSetColor(colours.text);
 
 	font.drawString(title, 10, 15);
     font.drawString("Use the up & down keys to set the port and the < and > to set the channel", 10, 35);
@@ -44,9 +44,9 @@ void MidiInSetupMode::draw() {
 		ofPushStyle();
 
 		if (settings["allInPorts"][i] == settings["inPortLabel"]) {
-            ofSetColor(189,89,40);
+            ofSetColor(colours.buttonActive);
 		} else {
-            ofSetColor(40,96,189);
+            ofSetColor(colours.text);
 		}
 
 		font.drawString(settings["allInPorts"][i], 10, 55 + (i * 20));
@@ -54,8 +54,11 @@ void MidiInSetupMode::draw() {
 	}
 
 	// Draw the midi channel to the right of these messages
-    ofSetColor(40,96,189);
-	font.drawString("Midi channel set to: " + ofToString(settings["midiInChannel"]), 320, 55);
+    ofSetColor(colours.text);
+    font.drawString("Midi channel set to: ", 320, 55);
+    ofSetColor(colours.buttonActive);
+    int xPos = font.getStringBoundingBox("Midi channel set to: ", 320, 55).x + font.getStringBoundingBox("Midi channel set to: ", 320, 55).width;
+    font.drawString( ofToString(settings["midiInChannel"]), xPos, 55);
 }
 
 void MidiInSetupMode::update() {

@@ -7,9 +7,10 @@
 
 #include "Mode.h"
 
-Mode::Mode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
+Mode::Mode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef)
 	: font(fontRef)
-	, settings(settingsRef) { 
+	, settings(settingsRef)
+    , colours(coloursRef) {
 }
 
 Mode::~Mode() {

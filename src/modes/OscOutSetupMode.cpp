@@ -7,8 +7,8 @@
 
 #include "OscOutSetupMode.h"
 
-OscOutSetupMode::OscOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
-	: Mode(fontRef, settingsRef) {
+OscOutSetupMode::OscOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef)
+    : Mode(fontRef, settingsRef, coloursRef) {
 	oscOutPortField.setup();
 	oscOutPortField.text = ofToString(settings["outGoingPortOsc"]);
 	oscOutPortField.bounds.x = 10;
@@ -52,11 +52,11 @@ void OscOutSetupMode::setup() {
 }
 
 void OscOutSetupMode::draw() {
-	ofSetColor(40,96,189);
+    ofSetColor(colours.text);
     font.drawString("OSC out settings", 10, 15);
     ofPushStyle();
     ofFill();
-    ofSetColor(255,216,139);
+    ofSetColor(colours.buttonActive);
     ofDrawRectRounded(oscOutPortField.bounds.x, oscOutPortField.bounds.y + 8, oscOutPortField.bounds.width, oscOutPortField.bounds.height, 3);
     ofDrawRectRounded(oscOutIPField.bounds.x, oscOutIPField.bounds.y + 8, oscOutIPField.bounds.width, oscOutIPField.bounds.height, 3);
     ofPopStyle();

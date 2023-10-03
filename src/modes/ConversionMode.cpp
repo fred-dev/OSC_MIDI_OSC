@@ -8,8 +8,8 @@
 
 #include "ConversionMode.h"
 
-ConversionMode::ConversionMode(ofTrueTypeFont & fontRef, ofJson & settingsRef)
-	: Mode(fontRef, settingsRef) {
+ConversionMode::ConversionMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef)
+    : Mode(fontRef, settingsRef, coloursRef) {
 	goToMidiOutSetMode.setup("Midi out setup", "BTN_MSG_GOTOMODE_MODE_SETTING_MIDI_OUT");
 	goToMidiOutSetMode.set(30, 175, 140, 20);
 	goToMidiOutSetMode.disableAllEvents();
@@ -43,7 +43,8 @@ void ConversionMode::setup() {
 }
 
 void ConversionMode::draw() {
-	ofSetColor(40,96,189);
+    
+	ofSetColor(colours.text);
     font.drawString("Conversion active", 10, 15);
     font.drawString(activityMessage, 10, 35);
 	font.drawString("Midi input on port " + settings["inPortLabel"].get<string>() + "  Channel: " + ofToString(settings["midiInChannel"]), 10, 55);

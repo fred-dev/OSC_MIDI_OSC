@@ -18,7 +18,7 @@ private:
 		std::string title;
 
 	public:
-		OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
+		OscInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef);
 		~OscInSetupMode();
 
 		void setup() override;

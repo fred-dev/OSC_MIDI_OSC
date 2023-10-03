@@ -17,7 +17,7 @@ private:
 
 
 public:
-	MidiInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
+	MidiInSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef);
 	~MidiInSetupMode();
 
     void setup() override;

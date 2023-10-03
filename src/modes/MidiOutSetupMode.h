@@ -13,7 +13,7 @@ private:
     std::string title = "MIDI out setup";;
 
 public:
-	MidiOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef);
+	MidiOutSetupMode(ofTrueTypeFont & fontRef, ofJson & settingsRef, Colours & coloursRef);
 	~MidiOutSetupMode();
 
 	void setup() override;
