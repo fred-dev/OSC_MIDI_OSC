@@ -1,13 +1,33 @@
-# Ignore all files by default
-*
+# openFrameworks: commit src/, bin/data/ and addons.make only.
+# Regenerate IDE projects with projectGenerator.
+*.xcodeproj/
+*.xcworkspace/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+xcuserdata/
+.vscode/
+/Makefile
+/config.make
+/Project.xcconfig
+/openFrameworks-Info.plist
+/of.entitlements
+/icon.rc
 
-# Allow directories and files
-!/src/
-!/addons.make
-!/README.md
+# Build output (bin/data is kept)
+/bin/*
 !/bin/data/
-!/Icon/
-!/screenshots/
+obj/
+build/
+*.o
+*.app/
+*.exe
+*.pdb
+*.ilk
+*.exp
 
-# Exclude all .DS_Store files
+# OS / editor
 .DS_Store
+._*
+Thumbs.db
