@@ -3,9 +3,14 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
     ofSetLogLevel(OF_LOG_VERBOSE);
-    font.load("frabk.ttf", 14);
+    // frabk.ttf (Franklin Gothic) is not distributed with the code; fall back to the system sans
+    if (!ofFile::doesFileExist("frabk.ttf") || !font.load("frabk.ttf", 14)) {
+        font.load(OF_TTF_SANS, 14);
+    }
     settingsManager.loadSettings("MIDI_OSC_SETTINGS.json");
     appSettings = settingsManager.getSettings();
+    // OSC is read once per frame, so the frame rate sets the OSC to MIDI latency
+    ofSetFrameRate(appSettings.value("frameRate", 60));
     midiManager.setup();
     oscManager.setup();
     ofBackground(255);
@@ -25,6 +30,11 @@ void ofApp::setup() {
 void ofApp::update() {
     modeManager.update();
     oscManager.handleIncomingMessages();
+    // MIDI activity arrives on ofxMidi's thread; show it from here
+    std::string midiActivity;
+    if (midiManager.getNewActivity(midiActivity)) {
+        activityMessage = midiActivity;
+    }
 }
 
 //--------------------------------------------------------------

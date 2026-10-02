@@ -34,7 +34,14 @@ public:
     void newMidiMessage(ofxMidiMessage& msg);
     vector<unsigned char> sysexMMCMsg;
     vector<unsigned char> buildMMCMessaage(int deviceID, const std::string& command);
-    std::vector<unsigned char> buildMidiShowControlMessage(int deviceID, const std::string& targetType, const std::string& commandType, const std::vector<int>& commandData);
+    // MSC fields are cue number, cue list and cue path as text ("12", "23.5"),
+    // except: timed_go / set_clock start with a timecode "hh:mm:ss:ff",
+    // set takes a control number and value (0-16383), fire takes a macro number.
+    std::vector<unsigned char> buildMidiShowControlMessage(int deviceID, const std::string& targetType, const std::string& commandType, const std::vector<std::string>& commandData);
+
+    // The latest activity text. MIDI arrives on ofxMidi's thread, so the text is
+    // handed to the main thread here instead of with ofSendMessage.
+    bool getNewActivity(std::string& text);
 
     //public destructor
 	~MidiManager();
@@ -50,7 +57,18 @@ private:
     ofJson midiManagerSettings;
     
     string message;
-    stringstream text;
+    std::mutex activityMutex;
+    std::string pendingActivity;
+    bool hasPendingActivity = false;
+    void postActivity(const std::string& text);
+
+    void openOutPort();
+    void openInPort();
+
+    // MIDI time code: quarter frames assembled into full positions
+    int mtcPieces[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int mtcPiecesSeen = 0;
+    void sendTimecode(int hours, int minutes, int seconds, int frames, int rateCode, ofxOscSender& sender);
     // Additional private members for MIDI management
     
     std::string getMidiMachineControlCommand(uint8_t byte);
@@ -59,7 +77,7 @@ private:
     std::string getMidiShowControTargetType(uint8_t byte);
     uint8_t getDeviceIdByte(ofxMidiMessage midiMessage);
     int getMidiShowControldeviceId(uint8_t byte);
-    std::vector<int> getMidiShowControlCommandData(ofxMidiMessage midiMessage);
+    std::vector<std::string> getMidiShowControlCommandData(const ofxMidiMessage& midiMessage);
 
     
 

@@ -106,7 +106,7 @@ void SettingsManager::loadSettings(const std::string& filename) {
         if (!settings["frameRate"].is_null()) {
             ofLogVerbose("loadSettings") << "frameRate set to " << settings["frameRate"] << endl;
         } else {
-            settings["frameRate"] = 25;
+            settings["frameRate"] = 60;
         }
     } else {
         ofLogError("SettingsManager::LoadSettings") << "Settings file not found: " << filename;
@@ -124,7 +124,7 @@ void SettingsManager::setDefaultSettings() {
     settings["Log_level"] = OF_LOG_VERBOSE;
     ofLogVerbose("SettingsManager::setDefaultSettings") << "Log level set to " << settings["Log_level"] << endl;
 
-#ifdef TARGET_OSX
+#ifndef TARGET_WIN32
     settings["useVirtualPort"] = true;
 #else
     settings["useVirtualPort"] = false;
@@ -153,7 +153,7 @@ void SettingsManager::setDefaultSettings() {
     settings["midiInChannel"] = 1;
     ofLogVerbose("SettingsManager::setDefaultSettings") << "midiInChannel set to " << settings["midiInChannel"] << endl;
 
-    settings["frameRate"] = 25;
+    settings["frameRate"] = 60;
     ofLogVerbose("SettingsManager::setDefaultSettings") << "frameRate set to " << settings["frameRate"] << endl;
 }
 
